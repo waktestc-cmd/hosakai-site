@@ -8,6 +8,7 @@ on:
     branches: [main]
     paths:
       - "site/**"
+      - "services/waitlist/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -28,6 +29,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - name: Test the waitlist service
+        run: node --test services/waitlist/worker.test.mjs
       - name: Check the design rules
         run: python3 .claude/skills/hosakai-ice-design/scripts/check_design.py site
       - uses: actions/configure-pages@v5

@@ -205,8 +205,7 @@
         <h2 class="ice-h1 site-close__title" id="launch-title">Stay ahead.<br />Not in the dark.</h2>
         <p class="ice-lede site-close__lede">Join the waitlist for launch updates and early-access news. Built for the people defending the network.</p>
       </div>
-      <form class="site-waitlist" id="waitlist-form" action="https://formsubmit.co/xenonlabs01@gmail.com" method="POST">
-        <input type="hidden" name="_subject" value="Breachmatrix waitlist signup" />
+      <form class="site-waitlist" id="waitlist-form" action="/api/waitlist" method="POST">
         <input type="text" name="_honey" class="site-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <label class="ds-label" for="waitlist-email">Your email</label>
         <div class="site-waitlist__row">
@@ -248,7 +247,7 @@
 
 <script src="js/icons.js"></script>
 <script src="js/hosakai-ice.js?v=prelaunch-1"></script>
-<script src="js/site.js?v=prelaunch-2"></script>
+<script src="js/site.js?v=waitlist-1"></script>
 <script>
   // The theme switch: one button in the bar, remembered by HosakaiIce.setTheme.
   (function () {
