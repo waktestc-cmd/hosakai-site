@@ -70,7 +70,7 @@
   <link rel="stylesheet" href="css/shell.css" />
   <link rel="stylesheet" href="css/ice-kit.css" />
   <link rel="stylesheet" href="css/patterns.css" />
-  <link rel="stylesheet" href="css/site.css?v=prelaunch-3" />
+  <link rel="stylesheet" href="css/site.css?v=ice-close-1" />
 </head>
 <body id="top">
 <a class="ds-btn ds-btn--secondary site-skip" href="#main">Skip to content</a>
@@ -199,6 +199,20 @@
 </div>
 
   <section class="hk-theme-dark site-close" id="launch" aria-labelledby="launch-title">
+    <svg class="site-close__lines" aria-hidden="true" focusable="false" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+      <g class="site-close__walls">
+        <rect x="0.5" y="0.5" width="999" height="999" />
+        <rect x="70" y="40" width="860" height="900" />
+        <rect x="130" y="60" width="740" height="840" />
+        <line x1="0" y1="0" x2="200" y2="80" />
+        <line x1="1000" y1="0" x2="800" y2="80" />
+        <line x1="0" y1="1000" x2="200" y2="840" />
+        <line x1="1000" y1="1000" x2="800" y2="840" />
+        <line x1="500" y1="0" x2="500" y2="80" />
+        <line x1="500" y1="840" x2="500" y2="1000" />
+      </g>
+      <rect class="site-close__door" x="200" y="80" width="600" height="760" />
+    </svg>
     <div class="site-close__body">
       <div class="site-close__intro">
         <p class="ds-label">04 / Get in early</p>
@@ -215,6 +229,9 @@
         <p class="ds-id" id="waitlist-note">Breachmatrix updates only. Unsubscribe by replying to any update.</p>
         <p class="site-waitlist__status" id="waitlist-status" role="status" aria-live="polite"></p>
       </form>
+    </div>
+    <div class="site-close__floor">
+      <canvas aria-hidden="true" class="ice-patch" data-ice="rise" data-ice-amount="1"></canvas>
     </div>
   </section>
 
