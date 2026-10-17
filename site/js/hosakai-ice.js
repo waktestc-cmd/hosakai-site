@@ -10,7 +10,7 @@
  *   <div class="ice-host"><canvas aria-hidden="true" class="ice-patch" data-ice="drift" data-ice-amount="0.9"></canvas></div>
  *   <div class="ice-band" data-ice-band="broken"><canvas aria-hidden="true" class="ice-patch"></canvas></div>
  *   <span data-scramble="51"></span>                 a number that scrambles in once
- *   <p class="ice-prompt" data-prompt="hosakai run baseline"></p>   a typed command line
+ *   <p class="ice-prompt" data-prompt="help"></p>   a typed command line
  *   <span data-ice-meter="67" data-cells="20" data-tone="ok"></span>  ####······
  *
  * Every animation stops under prefers-reduced-motion, off screen, and in a
@@ -249,47 +249,9 @@
     return remove;
   }
 
-  // The status lookup (references/status-lookup.md). "live" tones end in "!": the glyph pulses.
-  var STATUS = {
-    "assessments": { "executed": "ok", "running": "run!", "failed": "bad", "not executed": "idle" },
-    "execution": { "pending": "run!", "dispatched": "run!", "running": "run!", "completed": "ok",
-      "failed": "bad", "timeout": "bad", "cancelled": "idle", "skipped": "idle" },
-    "detection": { "detected": "ok", "not detected": "bad", "checking…": "run!", "checking...": "run!",
-      "waiting telemetry": "run!", "check expired": "run", "provider error": "bad", "skipped": "idle",
-      "not checked yet": "idle", "n/a": "idle" },
-    "rules": { "new": "run", "publishing": "run", "revoking": "run", "ready": "ok", "published": "ok",
-      "failed": "bad", "revoked": "idle" },
-    "rule-validation": { "valid": "ok", "invalid": "run" },
-    "agents-licence": { "active": "ok", "pending_approval": "run", "rejected": "bad", "revoked": "bad", "expired": "bad" },
-    "agents-connection": { "online": "ok", "not_activated": "idle", "offline": "bad" },
-    "licences": { "active": "ok", "revoked": "bad", "expired": "bad" },
-    "join-requests": { "pending": "run", "approved": "ok", "rejected": "bad" },
-    "approvals": { "waiting": "run", "approved": "ok", "dismissed": "idle", "failed": "bad" },
-    "intel-sync": { "content_changed": "ok", "no_change": "idle", "running": "run!", "syncing": "run!",
-      "pending": "run!", "queued": "run!", "failed": "bad", "error": "bad", "": "idle", "not run yet": "idle" },
-    "reports": { "ready": "ok", "draft": "run", "scheduled": "idle" },
-  };
-  // statusTone("agents-connection", "OFFLINE") -> "bad". Unknown words return "idle"; add them to the table.
-  function statusTone(area, word) {
-    var t = (STATUS[area] || {})[String(word == null ? "" : word).trim().toLowerCase()];
-    return t ? t.replace("!", "") : "idle";
-  }
-  function statusLive(area, word) {
-    var t = (STATUS[area] || {})[String(word == null ? "" : word).trim().toLowerCase()];
-    return !!t && t.slice(-1) === "!";
-  }
-  // <span data-status-area="rules">PUBLISHED</span> -> class "hk-status is-ok" (+ is-pulse when live).
-  function paintStatus(el) {
-    var area = el.getAttribute("data-status-area"), word = el.textContent;
-    el.classList.add("hk-status", "is-" + statusTone(area, word));
-    if (statusLive(area, word)) el.classList.add("is-pulse");
-    if (/^[A-Z_]+$/.test(word.trim())) el.classList.add("hk-status--mono");
-  }
-
   var started = new WeakSet();
   function init(root) {
     root = root || document;
-    root.querySelectorAll("[data-status-area]").forEach(paintStatus);
     root.querySelectorAll("canvas[data-ice]").forEach(function (c) {
       if (started.has(c)) return; started.add(c);
       startIce(c, { shape: c.getAttribute("data-ice"), amount: parseFloat(c.getAttribute("data-ice-amount") || "1") });
@@ -314,7 +276,6 @@
     startIce: startIce, startBand: startBand, scramble: scramble, prompt: prompt, meter: meter,
     setTheme: setTheme, initTheme: initTheme, init: init, reducedMotion: reducedMotion,
     openPopup: openPopup, toast: toast,
-    STATUS: STATUS, statusTone: statusTone, statusLive: statusLive, paintStatus: paintStatus,
   };
   initTheme();
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { init(); });

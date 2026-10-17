@@ -1,19 +1,10 @@
-/* Breachmatrix public site. Load LAST, after patterns.css.
-
-   Two parts:
-   1. The dashboard hero and five-step strip, copied as they are from the
-      design skill's assets/react/dashboard-hero.css (the same rules, minus
-      the dial, the facts and the timeline, which this page does not use).
-   2. Public-site glue: the sticky bar, page width, sections and footer.
-      Everything here composes tokens from tokens.css and sizes from the type
-      scale; nothing new is introduced. */
-
-/* ── 1. Copied: dashboard hero ── */
+/* Breachmatrix prelaunch site. Load after the shared design-system styles. */
 .ice-hero {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   align-items: center;
   gap: 40px;
+  min-height: 480px;
   padding: 32px 0 32px;
 }
 
@@ -55,90 +46,8 @@
   margin-top: 28px;
 }
 
-.ice-how {
-  margin-top: 16px;
-  color: var(--fg-2);
-}
-
-.ice-how > summary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  list-style: none;
-  color: var(--fg-3);
-}
-
-.ice-how > summary::-webkit-details-marker { display: none; }
-.ice-how > summary::before { content: "+"; font-family: var(--font-mono); }
-.ice-how[open] > summary::before { content: "−"; }
-.ice-how > summary:hover { color: var(--fg-1); }
-.ice-how > summary:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
-
-.ice-how > p {
-  max-width: 62ch;
-  margin: 8px 0 0;
-  font: 400 14px/1.55 var(--font-sans);
-}
-
-/* The five steps. Here they are a read-only strip, so the button-only rules
-   (cursor, hover, is-current) are left out. */
-.ice-steps {
-  display: grid;
-  grid-auto-columns: minmax(0, 1fr);
-  grid-auto-flow: column;
-  border: 1px solid var(--border);
-  border-radius: var(--r-panel);
-  background: var(--surface);
-}
-
-.ice-step {
-  display: grid;
-  align-content: start;
-  gap: 8px;
-  padding: 16px;
-  border: 0;
-  border-left: 1px solid var(--border);
-  background: none;
-  color: var(--fg-1);
-  text-align: left;
-}
-
-.ice-step:first-child { border-left: 0; }
-
-.ice-step-n {
-  display: flex;
-  justify-content: space-between;
-}
-
-.ice-step-n i {
-  width: 8px;
-  height: 8px;
-  margin-top: 3px;
-  border: 1px solid var(--fg-3);
-  border-radius: 50%;
-}
-
-.ice-step.is-breach .ice-step-n i {
-  border-color: var(--red);
-  background: var(--red); /* hk-allow: small mark */
-}
-
-.ice-step-name {
-  font: 500 16px/1.3 var(--font-sans);
-  letter-spacing: -0.01em;
-}
-
-.ice-step-tech {
-  margin-top: -6px;
-}
-
-.ice-step-state { color: var(--fg-2); }
-.ice-step.is-breach .ice-step-state { color: var(--fg-1); }
-
 @media (max-width: 1100px) {
   .ice-hero { gap: 24px; }
-  .ice-step { padding: 14px 12px; }
 }
 
 /* ── 2. Public-site glue ── */
@@ -239,7 +148,6 @@ main:focus { outline: none; }
 
 /* Hero: the right column is empty space, filled with ice. */
 .site-hero__actions { align-items: center; gap: 24px; }
-.site-hero__prompt { margin-top: 28px; }
 
 .site-hero__ice {
   position: relative;
@@ -256,77 +164,27 @@ main:focus { outline: none; }
   text-wrap: balance;
 }
 
-/* How it works: three panels, each ending in a status line. */
-.site-steps {
+/* Three public-facing questions, not a product walkthrough. */
+.site-questions {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
 
-.site-step {
+.site-question {
   display: grid;
-  grid-template-rows: auto auto 1fr auto;
+  align-content: start;
   gap: 8px;
 }
 
-.site-step__title {
+.site-question__title {
   font: 500 16px/1.3 var(--font-sans);
   color: var(--fg-1);
 }
 
-.site-step__body {
+.site-question__body {
   max-width: 56ch;
   color: var(--fg-2);
-}
-
-.site-step__status {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 16px;
-  margin-top: 8px;
-  padding-top: 12px;
-  border-top: 1px solid var(--border);
-}
-
-.site-step__arrow { color: var(--fg-3); }
-
-/* Product screenshot: a plain panel, the image fills it. */
-.site-shot {
-  margin: 0;
-  overflow: hidden;
-}
-
-.site-shot img { width: 100%; }
-
-/* The five steps: each step carries an ice band, styled as the result
-   sheet's band (.rdm-band): a hairline and the --well ground. */
-.site-band {
-  margin-top: 4px;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  background: var(--well);
-}
-
-/* Proof: big single metrics. */
-.site-proof {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.site-proof__item {
-  display: grid;
-  align-content: start;
-  justify-items: start;
-  gap: 8px;
-}
-
-.site-big {
-  font: 300 64px/1 var(--font-sans);
-  letter-spacing: -0.03em;
-  font-variant-numeric: tabular-nums;
-  color: var(--fg-1);
 }
 
 /* Final call to action: a closing scene, after memorable.sh. Black in both
@@ -377,12 +235,6 @@ main:focus { outline: none; }
   text-align: center;
 }
 
-.site-close__prompt {
-  min-height: 20px;
-  margin-top: 16px;
-}
-
-.site-close .ice-prompt { justify-content: center; }
 .site-close__title { margin-top: 12px; }
 .site-close__lede { margin-left: auto; margin-right: auto; }
 .site-close__actions { justify-content: center; }
@@ -485,11 +337,7 @@ main:focus { outline: none; }
 }
 
 @media (max-width: 980px) {
-  .site-steps,
-  .site-proof { grid-template-columns: minmax(0, 1fr); }
-  .ice-steps { grid-auto-flow: row; }
-  .ice-step { border-left: 0; border-top: 1px solid var(--border); }
-  .ice-step:first-child { border-top: 0; }
+  .site-questions { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (max-width: 760px) {

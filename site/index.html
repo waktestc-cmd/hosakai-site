@@ -1,29 +1,19 @@
 <!doctype html>
-<!--
-  Breachmatrix public home page. Built from the HOSAKAI ice design system
-  (.claude/skills/hosakai-ice-design). Every class comes from ./css; the
-  public-site glue lives in css/site.css. Run the checker after any change:
-    python3 .claude/skills/hosakai-ice-design/scripts/check_design.py site
-
-  Load order: base -> tokens -> components -> shell -> ice-kit -> patterns -> site.
--->
 <html lang="en" class="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Breachmatrix · See where your defences break</title>
-  <meta name="description" content="Breachmatrix runs safe test attacks through your defences and shows where they held and where they broke. For security teams and CISOs." />
+  <title>Breachmatrix · Your blind spots. Their way in.</title>
+  <meta name="description" content="A quiet dashboard is not proof of a quiet network. Breachmatrix is taking shape for the people defending it. Application not yet public." />
   <link rel="canonical" href="https://breachmatrix.com/" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://breachmatrix.com/" />
   <meta property="og:site_name" content="Breachmatrix" />
-  <meta property="og:title" content="Breachmatrix · See where your defences break" />
-  <meta property="og:description" content="Safe test attacks through your defences. See where they held and where they broke." />
-  <meta property="og:image" content="https://breachmatrix.com/img/og.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Your defences held in 3 of 5 steps and broke in 2." />
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:title" content="Breachmatrix · Your blind spots. Their way in." />
+  <meta property="og:description" content="For the people defending the network. Not yet public. Not standing still." />
+  <meta property="og:image" content="https://breachmatrix.com/brand/hosakai-monogram-black.png" />
+  <meta property="og:image:alt" content="Breachmatrix monogram" />
+  <meta name="twitter:card" content="summary" />
   <link rel="icon" type="image/png" href="brand/hosakai-monogram-black.png" media="(prefers-color-scheme: light)" />
   <link rel="icon" type="image/png" href="brand/hosakai-monogram-white.png" media="(prefers-color-scheme: dark)" />
   <script>
@@ -39,12 +29,11 @@
   <link rel="stylesheet" href="css/shell.css" />
   <link rel="stylesheet" href="css/ice-kit.css" />
   <link rel="stylesheet" href="css/patterns.css" />
-  <link rel="stylesheet" href="css/site.css" />
+  <link rel="stylesheet" href="css/site.css?v=prelaunch-1" />
 </head>
 <body id="top">
 <a class="ds-btn ds-btn--secondary site-skip" href="#main">Skip to content</a>
 
-<!-- ── Top bar (56px): monogram, 4 links, theme switch, the one primary button. ── -->
 <header class="shell-header site-bar">
   <a href="#top" class="shell-brand" aria-label="Breachmatrix, back to top">
     <img class="site-light" src="brand/hosakai-monogram-black.png" alt="" width="24" height="24" />
@@ -53,10 +42,8 @@
   </a>
   <nav class="site-nav" aria-label="Main">
     <ul>
-      <li><a class="shell-tabs__link" href="#product">Product</a></li>
-      <li><a class="shell-tabs__link" href="#how">How it works</a></li>
-      <li><a class="shell-tabs__link" href="#security">Security</a></li>
-      <li><a class="shell-tabs__link" href="#contact">Contact</a></li>
+      <li><a class="shell-tabs__link" href="#perspective">Our perspective</a></li>
+      <li><a class="shell-tabs__link" href="#questions">The questions</a></li>
     </ul>
   </nav>
   <div class="shell-header__spacer"></div>
@@ -65,169 +52,61 @@
       <i data-lucide="moon" width="16" height="16" stroke-width="1.75"></i>
       <i data-lucide="sun" width="16" height="16" stroke-width="1.75"></i>
     </button>
-    <a class="ds-btn ds-btn--primary" href="#contact">Book a demo</a>
+    <a class="ds-btn ds-btn--primary" href="#launch">What's next</a>
   </div>
 </header>
 
 <main id="main" class="app-route-stage" tabindex="-1">
 <div class="site-page">
 
-  <!-- 1. Hero. Left: eyebrow, the answer, lede, actions, typed prompt. Right: ice in empty space. -->
   <section class="ice-hero" aria-labelledby="hero-title">
     <div>
-      <p class="ds-label ice-eyebrow"><span>Example result</span><span>Safe simulation</span></p>
-      <h1 class="ice-h1" id="hero-title">Your defences held in 3 of 5 steps and <em>broke in 2</em>.</h1>
-      <p class="ice-lede">Breachmatrix runs safe test attacks through your defences and shows where they held and where they broke.</p>
+      <p class="ds-label ice-eyebrow"><span>Breachmatrix</span><span>For the defenders</span></p>
+      <h1 class="ice-h1" id="hero-title">Your <em>blind spots.</em><br />Their way in.</h1>
+      <p class="ice-lede">You see the alerts. You know the stakes. It's what you don't see that should keep you asking questions.</p>
       <div class="ice-actions site-hero__actions">
-        <a class="ds-btn ds-btn--primary" href="#contact">Book a demo</a>
-        <a class="hk-link" href="#how">See how it works</a>
+        <a class="ds-btn ds-btn--primary" href="#perspective">Explore the thinking</a>
+        <span class="ds-label">Application not yet public</span>
       </div>
-      <p class="site-hero__prompt" data-prompt="breachmatrix run baseline"></p>
     </div>
     <div class="site-hero__ice">
       <canvas aria-hidden="true" class="ice-patch" data-ice="drift" data-ice-amount="0.9"></canvas>
     </div>
   </section>
 
-  <!-- 2. The problem, in one sentence. -->
-  <section class="site-section" aria-labelledby="problem-title">
-    <p class="ds-label">The problem</p>
-    <h2 class="site-display" id="problem-title">Security tools are bought to catch attacks, but few teams can say which attacks they would miss.</h2>
+  <section class="site-section" id="perspective" aria-labelledby="problem-title">
+    <p class="ds-label">01 / Our perspective</p>
+    <h2 class="site-display" id="problem-title">A quiet dashboard is not proof of a quiet network.</h2>
+    <p class="site-lede">Coverage is not the same as confidence. For SOC teams, detection engineers and security leaders, the gap between the two matters.</p>
   </section>
 
-  <!-- 3. How it works: three numbered steps, each with a status line in the app's words. -->
-  <section class="site-section" id="how" aria-labelledby="how-title">
+  <section class="site-section" id="questions" aria-labelledby="questions-title">
     <div class="site-section__head">
-      <p class="ds-label">How it works</p>
-      <h2 class="site-h2" id="how-title">Three steps, from the first test to the first fix.</h2>
+      <p class="ds-label">02 / The questions that matter</p>
+      <h2 class="site-h2" id="questions-title">Less assumption. Harder questions.</h2>
     </div>
-    <ol class="site-steps">
-      <li class="ds-panel site-step">
-        <p class="ds-label">01</p>
-        <h3 class="site-step__title">Run safe test attacks</h3>
-        <p class="site-step__body">An agent on your network runs safe tests of real attacker techniques. Each one starts from an ordinary signed-in account.</p>
-        <p class="site-step__status">
-          <span class="hk-status is-ok">Executed</span>
-          <span class="hk-status is-run is-pulse">Running</span>
-          <span class="hk-status is-idle">Not executed</span>
-        </p>
-      </li>
-      <li class="ds-panel site-step">
-        <p class="ds-label">02</p>
-        <h3 class="site-step__title">Check what your tools saw</h3>
-        <p class="site-step__body">Breachmatrix asks your detection tools whether each attack raised an alert. You see every result, one line each.</p>
-        <p class="site-step__status">
-          <span class="hk-status is-ok">Detected</span>
-          <span class="hk-status is-run is-pulse">Checking…</span>
-          <span class="hk-status is-bad">Not detected</span>
-        </p>
-      </li>
-      <li class="ds-panel site-step">
-        <p class="ds-label">03</p>
-        <h3 class="site-step__title">Fix what got through</h3>
-        <p class="site-step__body">For each miss you get a detection query to add to your tools. Run the test again to confirm the fix.</p>
-        <p class="site-step__status">
-          <span class="hk-status is-bad">Not detected</span>
-          <span class="site-step__arrow" aria-hidden="true">→</span>
-          <span class="ds-sr-only">then, after the fix,</span>
-          <span class="hk-status is-ok">Detected</span>
-        </p>
-      </li>
-    </ol>
-  </section>
-
-  <!-- 4. The product, in a bordered panel. The screenshot follows the theme. -->
-  <section class="site-section" id="product" aria-labelledby="product-title">
-    <div class="site-section__head">
-      <p class="ds-label">Product</p>
-      <h2 class="site-h2" id="product-title">The answer comes first.</h2>
-      <p class="site-lede">The dashboard opens on one sentence: where your defences held, and where they broke. The numbers and the detail sit under it.</p>
-    </div>
-    <figure class="hk-panel site-shot">
-      <img class="site-light" src="img/dashboard-light.png" width="1440" height="900" loading="lazy" alt="The Breachmatrix dashboard. It reads: your defences held in 1 of 5 steps and broke in 3. Your tools detected 26 of the 33 attacks we ran. A dial shows a score of 51 of 100." />
-      <img class="site-dark" src="img/dashboard-dark.png" width="1440" height="900" loading="lazy" alt="The Breachmatrix dashboard. It reads: your defences held in 1 of 5 steps and broke in 3. Your tools detected 26 of the 33 attacks we ran. A dial shows a score of 51 of 100." />
-    </figure>
-  </section>
-
-  <!-- 5. The five steps of an attack, each as an ice band: dense where it held, a red gap where it broke. -->
-  <section class="site-section" id="security" aria-labelledby="steps-title">
-    <div class="site-section__head">
-      <p class="ds-label">Security</p>
-      <h2 class="site-h2" id="steps-title">The five steps of an attack on your network</h2>
-      <p class="site-lede">Every attack is a safe test run by a Breachmatrix agent, never a real one. Each test runs on its own; the steps show where in an attack it fits.</p>
-    </div>
-    <ol class="ice-steps" aria-label="The five steps of an attack">
-      <li class="ice-step">
-        <span class="ice-step-n ds-label">01<i aria-hidden="true"></i></span>
-        <span class="ice-step-name">Scout your systems</span>
-        <span class="ice-step-tech ds-id">Discovery</span>
-        <span class="ice-band site-band" aria-hidden="true" data-ice-band="held"><canvas aria-hidden="true" class="ice-patch"></canvas></span>
-        <span class="ice-step-state ds-label">All detected</span>
-      </li>
-      <li class="ice-step is-breach">
-        <span class="ice-step-n ds-label">02<i aria-hidden="true"></i></span>
-        <span class="ice-step-name">Steal passwords</span>
-        <span class="ice-step-tech ds-id">Credential access</span>
-        <span class="ice-band site-band" aria-hidden="true" data-ice-band="broken"><canvas aria-hidden="true" class="ice-patch"></canvas></span>
-        <span class="ice-step-state ds-label">2 missed of 7</span>
-      </li>
-      <li class="ice-step is-breach">
-        <span class="ice-step-n ds-label">03<i aria-hidden="true"></i></span>
-        <span class="ice-step-name">Spread to other computers</span>
-        <span class="ice-step-tech ds-id">Lateral movement</span>
-        <span class="ice-band site-band" aria-hidden="true" data-ice-band="broken"><canvas aria-hidden="true" class="ice-patch"></canvas></span>
-        <span class="ice-step-state ds-label">1 missed of 5</span>
-      </li>
-      <li class="ice-step">
-        <span class="ice-step-n ds-label">04<i aria-hidden="true"></i></span>
-        <span class="ice-step-name">Seize the login system</span>
-        <span class="ice-step-tech ds-id">Domain dominance</span>
-        <span class="ice-band site-band" aria-hidden="true" data-ice-band="held"><canvas aria-hidden="true" class="ice-patch"></canvas></span>
-        <span class="ice-step-state ds-label">All detected</span>
-      </li>
-      <li class="ice-step">
-        <span class="ice-step-n ds-label">05<i aria-hidden="true"></i></span>
-        <span class="ice-step-name">Leave a back door</span>
-        <span class="ice-step-tech ds-id">Persistence</span>
-        <span class="ice-band site-band" aria-hidden="true" data-ice-band="held"><canvas aria-hidden="true" class="ice-patch"></canvas></span>
-        <span class="ice-step-state ds-label">All detected</span>
-      </li>
-    </ol>
-    <details class="ice-how">
-      <summary class="ds-label">How this is measured</summary>
-      <p>Each test starts from an ordinary signed-in account, so the question is whether your tools notice an attacker who is already inside. A step holds when every test in it raised an alert. An attacker only needs one unnoticed way through a step.</p>
-    </details>
-  </section>
-
-  <!-- 6. Proof: facts about the product, not customer results. 20 = the Baseline
-       catalogue v1 (design repo, src/mocks/baseline.json); recheck it when the catalogue changes. -->
-  <section class="site-section" aria-labelledby="proof-title">
-    <div class="site-section__head">
-      <p class="ds-label">In numbers</p>
-      <h2 class="site-h2" id="proof-title">What one Baseline assessment covers</h2>
-    </div>
-    <div class="site-proof">
-      <div class="site-proof__item">
-        <p class="site-big">5</p>
-        <p class="ds-label">Attack steps, from scouting your systems to leaving a back door</p>
-      </div>
-      <div class="site-proof__item">
-        <p class="site-big">20</p>
-        <p class="ds-label">Active Directory attack techniques, from Kerberoasting to DCSync</p>
-      </div>
-      <div class="site-proof__item">
-        <p class="site-big">0</p>
-        <p class="ds-label">Real attacks. Every one is a safe test</p>
-      </div>
+    <div class="site-questions">
+      <article class="ds-panel site-question">
+        <p class="ds-label">Visibility</p>
+        <h3 class="site-question__title">What aren't you seeing?</h3>
+        <p class="site-question__body">An alert tells you what surfaced. Silence leaves a different question.</p>
+      </article>
+      <article class="ds-panel site-question">
+        <p class="ds-label">Confidence</p>
+        <h3 class="site-question__title">What are you trusting?</h3>
+        <p class="site-question__body">A control in place is not the same as a defence you can count on.</p>
+      </article>
+      <article class="ds-panel site-question">
+        <p class="ds-label">Evidence</p>
+        <h3 class="site-question__title">What can you stand behind?</h3>
+        <p class="site-question__body">When the question is “are we ready?”, the answer needs more than an assumption.</p>
+      </article>
     </div>
   </section>
 
 </div>
 
-  <!-- 7. Final call to action: a closing scene, black in both themes (the sign-in brand
-       panel's .hk-theme-dark scope). Hairlines draw a corridor to a door; the words sit
-       in the door's empty space; ice rises along the floor, never behind text. -->
-  <section class="hk-theme-dark site-close" id="contact" aria-labelledby="contact-title">
+    <section class="hk-theme-dark site-close" id="launch" aria-labelledby="launch-title">
     <div class="site-close__floor"><canvas aria-hidden="true" class="ice-patch" data-ice="rise" data-ice-amount="1"></canvas></div>
     <svg class="site-close__lines" aria-hidden="true" focusable="false" viewBox="0 0 1000 1000" preserveAspectRatio="none">
       <g class="site-close__walls">
@@ -245,20 +124,17 @@
       <rect class="site-close__door" x="250" y="180" width="500" height="580" />
     </svg>
     <div class="site-close__body">
-      <p class="ds-label">( Contact )</p>
-      <p class="site-close__prompt" id="close-prompt" data-command="breachmatrix book --demo"></p>
-      <h2 class="ice-h1 site-close__title" id="contact-title">See where your defences <em>break</em>.</h2>
-      <p class="ice-lede site-close__lede">Book a demo. We will walk you through a full assessment, from the first test to the first fix.</p>
+      <p class="ds-label">03 / What's next</p>
+      <h2 class="ice-h1 site-close__title" id="launch-title">Not yet public.<br />Not standing still.</h2>
+      <p class="ice-lede site-close__lede">Breachmatrix is taking shape. The application stays under wraps for now. The questions shouldn't.</p>
       <div class="ice-actions site-close__actions">
-        <!-- TODO: point this at the real booking page or address once it exists. -->
-        <a class="ds-btn ds-btn--primary" href="#contact">Book a demo</a>
+        <a class="ds-btn ds-btn--secondary" href="#questions">Keep asking questions</a>
       </div>
     </div>
   </section>
 
 </main>
 
-<!-- 8. Footer: the closing scene continues, quiet and mono. -->
 <footer class="hk-theme-dark site-foot">
   <div class="site-foot__inner">
     <div class="site-foot__brand">
@@ -275,21 +151,21 @@
     <nav class="site-foot__nav" aria-label="Footer">
       <p class="ds-label">Site</p>
       <ul>
-        <li><a href="#product">Product</a></li>
-        <li><a href="#how">How it works</a></li>
-        <li><a href="#security">Security</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#perspective">Our perspective</a></li>
+        <li><a href="#questions">The questions</a></li>
+        <li><a href="#launch">What's next</a></li>
+        <li><a href="#top">Back to top</a></li>
       </ul>
     </nav>
   </div>
   <div class="site-foot__base">
     <p class="ds-id">© 2026 Breachmatrix</p>
-    <p class="ds-id">Safe simulation. Every attack is a test, never a real one.</p>
+    <p class="ds-id">For the defenders. More when it's time.</p>
   </div>
 </footer>
 
 <script src="js/icons.js"></script>
-<script src="js/hosakai-ice.js"></script>
+<script src="js/hosakai-ice.js?v=prelaunch-1"></script>
 <script>
   // The theme switch: one button in the bar, remembered by HosakaiIce.setTheme.
   (function () {
@@ -301,16 +177,6 @@
     label();
   })();
 
-  // The closing prompt types itself once, when it scrolls into view.
-  (function () {
-    var el = document.getElementById("close-prompt"), cmd = el.getAttribute("data-command");
-    if (!window.IntersectionObserver) { HosakaiIce.prompt(el, cmd); return; }
-    var seen = new IntersectionObserver(function (e) {
-      if (!e[0].isIntersecting) return;
-      seen.disconnect(); HosakaiIce.prompt(el, cmd);
-    }, { threshold: 1 });
-    seen.observe(el);
-  })();
 </script>
 </body>
 </html>
