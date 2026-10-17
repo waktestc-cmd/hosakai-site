@@ -217,7 +217,7 @@ html:not(.dark) .site-dark { display: none; }
   border-top: 1px solid var(--border);
 }
 
-.site-page:focus { outline: none; }
+main:focus { outline: none; }
 
 .site-section__head {
   display: grid;
@@ -329,36 +329,154 @@ html:not(.dark) .site-dark { display: none; }
   color: var(--fg-1);
 }
 
-/* Final call to action: the page head, reused. */
-.site-cta {
-  margin: 0;
-  padding-top: 40px;
+/* Final call to action: a closing scene, after memorable.sh. Black in both
+   themes through .hk-theme-dark (tokens.css), as the sign-in brand panel is.
+   The corridor is 1px hairlines; the door is the empty space the words sit in. */
+.site-close {
+  position: relative;
+  min-height: 680px;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--fg-1);
+}
+
+.site-close__lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  pointer-events: none;
+}
+
+.site-close__lines * { vector-effect: non-scaling-stroke; }
+.site-close__walls { stroke: var(--border); stroke-width: 1; }
+.site-close__door { stroke: var(--border-control); stroke-width: 1; }
+
+/* The floor: ice rising under the door, thick at the bottom edge. */
+.site-close__floor {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 24%;
+}
+
+/* The door: x 25–75%, y 18–76% of the scene, matching the SVG. */
+.site-close__body {
+  position: absolute;
+  top: 18%;
+  bottom: 24%;
+  left: 25%;
+  right: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+}
+
+.site-close__prompt {
+  min-height: 20px;
+  margin-top: 16px;
+}
+
+.site-close .ice-prompt { justify-content: center; }
+.site-close__title { margin-top: 12px; }
+.site-close__lede { margin-left: auto; margin-right: auto; }
+.site-close__actions { justify-content: center; }
+
+/* Footer: the closing scene continues, quiet and mono. */
+.site-foot {
+  background: var(--bg);
+  color: var(--fg-1);
   border-top: 1px solid var(--border);
 }
 
-/* Footer: quiet, mono. */
-.site-footer {
+.site-foot__inner,
+.site-foot__base {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+.site-foot__inner {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   justify-content: space-between;
-  gap: 12px 24px;
-  padding: 24px 0 8px;
+  gap: 40px;
 }
 
-.site-footer ul {
+.site-foot__brand {
+  display: grid;
+  gap: 20px;
+  width: min(100%, 400px);
+}
+
+.site-foot__mark {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px 24px;
+  align-items: center;
+  gap: 12px;
 }
 
-.site-footer a { color: var(--fg-3); }
-.site-footer a:hover { color: var(--fg-1); }
+.site-foot__def dt {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
 
-.site-footer a:focus-visible {
+.site-foot__word {
+  font: 300 40px/1 var(--font-sans);
+  letter-spacing: -0.03em;
+}
+
+.site-foot__def dd {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  margin: 0;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font: 400 14px/1.55 var(--font-sans);
+  color: var(--fg-2);
+}
+
+.site-foot__nav {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  min-width: 160px;
+}
+
+.site-foot__nav ul {
+  display: grid;
+  gap: 8px;
+}
+
+.site-foot__nav a {
+  font: 400 13px/1.4 var(--font-mono);
+  color: var(--fg-2);
+}
+
+.site-foot__nav a:hover { color: var(--fg-1); }
+
+.site-foot__nav a:focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 2px;
   border-radius: var(--r-chip);
+}
+
+.site-foot__base {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding-top: 16px;
+  padding-bottom: 24px;
+  border-top: 1px solid var(--border);
 }
 
 /* ── Breakpoints (typography-layout.md) ── */
@@ -381,6 +499,11 @@ html:not(.dark) .site-dark { display: none; }
   .ice-hero { grid-template-columns: minmax(0, 1fr); }
   .site-hero__ice { min-height: 140px; }
   .site-display { font-size: 32px; }
+  .site-close { min-height: 0; border-top: 1px solid var(--border); }
+  .site-close__lines { display: none; }
+  .site-close__floor { height: 120px; }
+  .site-close__body { position: relative; inset: auto; padding: 64px 16px 152px; }
+  .site-foot__inner, .site-foot__base { padding-left: 16px; padding-right: 16px; }
 }
 
 @media (max-width: 400px) {

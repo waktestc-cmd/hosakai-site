@@ -68,7 +68,8 @@
   </div>
 </header>
 
-<main id="main" class="site-page app-route-stage" tabindex="-1">
+<main id="main" class="app-route-stage" tabindex="-1">
+<div class="site-page">
 
   <!-- 1. Hero. Left: eyebrow, the answer, lede, actions, typed prompt. Right: ice in empty space. -->
   <section class="ice-hero" aria-labelledby="hero-title">
@@ -223,35 +224,71 @@
     </div>
   </section>
 
-  <!-- 7. Final call to action: the page head, reused, with its ice in the empty space on the right. -->
-  <section class="ice-head site-cta" id="contact" aria-labelledby="contact-title">
-    <canvas aria-hidden="true" class="ice-patch ice-head__ice" data-ice="drift" data-ice-amount="0.9"></canvas>
-    <div class="ice-head__text">
-      <p class="ds-label ice-head__eyebrow">Contact</p>
-      <h2 class="ice-head__title" id="contact-title">See where your defences break</h2>
-      <p class="ice-head__lede">Book a demo. We will walk you through a full assessment, from the first test to the first fix.</p>
-    </div>
-    <div class="ice-head__actions">
-      <!-- TODO: point this at the real booking page or address once it exists. -->
-      <a class="ds-btn ds-btn--primary" href="#contact">Book a demo</a>
+</div>
+
+  <!-- 7. Final call to action: a closing scene, black in both themes (the sign-in brand
+       panel's .hk-theme-dark scope). Hairlines draw a corridor to a door; the words sit
+       in the door's empty space; ice rises along the floor, never behind text. -->
+  <section class="hk-theme-dark site-close" id="contact" aria-labelledby="contact-title">
+    <div class="site-close__floor"><canvas aria-hidden="true" class="ice-patch" data-ice="rise" data-ice-amount="1"></canvas></div>
+    <svg class="site-close__lines" aria-hidden="true" focusable="false" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+      <g class="site-close__walls">
+        <rect x="0.5" y="0.5" width="999" height="999" />
+        <rect x="87.5" y="63" width="825" height="853" />
+        <rect x="155" y="111.6" width="690" height="739.6" />
+        <rect x="205" y="147.6" width="590" height="655.6" />
+        <line x1="0" y1="0" x2="250" y2="180" />
+        <line x1="1000" y1="0" x2="750" y2="180" />
+        <line x1="0" y1="1000" x2="250" y2="760" />
+        <line x1="1000" y1="1000" x2="750" y2="760" />
+        <line x1="500" y1="0" x2="500" y2="180" />
+        <line x1="500" y1="760" x2="500" y2="1000" />
+      </g>
+      <rect class="site-close__door" x="250" y="180" width="500" height="580" />
+    </svg>
+    <div class="site-close__body">
+      <p class="ds-label">( Contact )</p>
+      <p class="site-close__prompt" id="close-prompt" data-command="breachmatrix book --demo"></p>
+      <h2 class="ice-h1 site-close__title" id="contact-title">See where your defences <em>break</em>.</h2>
+      <p class="ice-lede site-close__lede">Book a demo. We will walk you through a full assessment, from the first test to the first fix.</p>
+      <div class="ice-actions site-close__actions">
+        <!-- TODO: point this at the real booking page or address once it exists. -->
+        <a class="ds-btn ds-btn--primary" href="#contact">Book a demo</a>
+      </div>
     </div>
   </section>
 
-  <!-- 8. Footer: quiet, mono. -->
-  <footer class="site-footer">
-    <p class="ds-label">Breachmatrix · autonomous security testing</p>
-    <nav aria-label="Footer">
-      <ul class="ds-label">
+</main>
+
+<!-- 8. Footer: the closing scene continues, quiet and mono. -->
+<footer class="hk-theme-dark site-foot">
+  <div class="site-foot__inner">
+    <div class="site-foot__brand">
+      <p class="site-foot__mark">
+        <img src="brand/hosakai-monogram-white.png" alt="" width="24" height="24" />
+        <span class="shell-brand__word">BREACHMATRIX</span>
+      </p>
+      <dl class="site-foot__def">
+        <dt><span class="site-foot__word">breach</span> <span class="ds-id">/briːtʃ/ noun</span></dt>
+        <dd><span class="ds-id">1</span><span>A gap in a wall or a line of defence.</span></dd>
+        <dd><span class="ds-id">2</span><span>The place where an attacker gets through.</span></dd>
+      </dl>
+    </div>
+    <nav class="site-foot__nav" aria-label="Footer">
+      <p class="ds-label">Site</p>
+      <ul>
         <li><a href="#product">Product</a></li>
         <li><a href="#how">How it works</a></li>
         <li><a href="#security">Security</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
+  </div>
+  <div class="site-foot__base">
     <p class="ds-id">© 2026 Breachmatrix</p>
-  </footer>
-
-</main>
+    <p class="ds-id">Safe simulation. Every attack is a test, never a real one.</p>
+  </div>
+</footer>
 
 <script src="js/icons.js"></script>
 <script src="js/hosakai-ice.js"></script>
@@ -264,6 +301,17 @@
       HosakaiIce.setTheme(root.classList.contains("dark") ? "light" : "dark"); label();
     });
     label();
+  })();
+
+  // The closing prompt types itself once, when it scrolls into view.
+  (function () {
+    var el = document.getElementById("close-prompt"), cmd = el.getAttribute("data-command");
+    if (!window.IntersectionObserver) { HosakaiIce.prompt(el, cmd); return; }
+    var seen = new IntersectionObserver(function (e) {
+      if (!e[0].isIntersecting) return;
+      seen.disconnect(); HosakaiIce.prompt(el, cmd);
+    }, { threshold: 1 });
+    seen.observe(el);
   })();
 </script>
 </body>
