@@ -1,209 +1,267 @@
 <!doctype html>
 <!--
-  HOSAKAI starter page. Copy this file and change ONLY the content inside
-  <div class="shell-page"> (and the tab labels). Do not restyle anything:
-  every class here is defined in ../css. See SKILL.md for the rules.
+  Breachmatrix public home page. Built from the HOSAKAI ice design system
+  (.claude/skills/hosakai-ice-design). Every class comes from ./css; the
+  public-site glue lives in css/site.css. Run the checker after any change:
+    python3 .claude/skills/hosakai-ice-design/scripts/check_design.py site
 
-  Load order matters: base -> tokens -> components -> shell -> ice-kit -> patterns.
+  Load order: base -> tokens -> components -> shell -> ice-kit -> patterns -> site.
 -->
 <html lang="en" class="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Assessments · HOSAKAI</title>
+  <title>Breachmatrix · See where your defences break</title>
+  <meta name="description" content="Breachmatrix runs safe test attacks through your defences and shows where they held and where they broke. For security teams and CISOs." />
+  <!-- TODO: once the full domain is confirmed, make og:image absolute and add og:url and a canonical link. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Breachmatrix" />
+  <meta property="og:title" content="Breachmatrix · See where your defences break" />
+  <meta property="og:description" content="Safe test attacks through your defences. See where they held and where they broke." />
+  <meta property="og:image" content="img/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Your defences held in 3 of 5 steps and broke in 2." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/png" href="brand/hosakai-monogram-black.png" media="(prefers-color-scheme: light)" />
+  <link rel="icon" type="image/png" href="brand/hosakai-monogram-white.png" media="(prefers-color-scheme: dark)" />
+  <script>
+    /* Set the saved theme before first paint, so dark visitors see no flash. */
+    try { if (localStorage.getItem("theme-preference") === "dark") document.documentElement.className = "dark"; } catch (e) { /* storage may be blocked */ }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/base.css" />
-  <link rel="stylesheet" href="../css/tokens.css" />
-  <link rel="stylesheet" href="../css/components.css" />
-  <link rel="stylesheet" href="../css/shell.css" />
-  <link rel="stylesheet" href="../css/ice-kit.css" />
-  <link rel="stylesheet" href="../css/patterns.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/shell.css" />
+  <link rel="stylesheet" href="css/ice-kit.css" />
+  <link rel="stylesheet" href="css/patterns.css" />
+  <link rel="stylesheet" href="css/site.css" />
 </head>
-<body>
-<div class="shell">
+<body id="top">
+<a class="ds-btn ds-btn--secondary site-skip" href="#main">Skip to content</a>
 
-  <!-- ── Header (56px): brand, search, profile. Same on every page. ── -->
-  <header class="shell-header">
-    <a href="#" class="shell-brand" aria-label="HOSAKAI, go to dashboard">
-      <img class="brand-light" src="../brand/hosakai-monogram-black.png" alt="" width="24" height="24" />
-      <img class="brand-dark" src="../brand/hosakai-monogram-white.png" alt="" width="24" height="24" />
-      <span class="shell-brand__word">HOSAKAI</span>
-    </a>
-    <button type="button" class="shell-search" aria-label="Search pages and actions (Ctrl K)">
-      <i data-lucide="search" width="15" height="15" stroke-width="1.75"></i>
-      <span class="shell-search__text">Search pages and actions</span>
-      <kbd class="ds-kbd">Ctrl K</kbd>
+<!-- ── Top bar (56px): monogram, 4 links, theme switch, the one primary button. ── -->
+<header class="shell-header site-bar">
+  <a href="#top" class="shell-brand" aria-label="Breachmatrix, back to top">
+    <img class="site-light" src="brand/hosakai-monogram-black.png" alt="" width="24" height="24" />
+    <img class="site-dark" src="brand/hosakai-monogram-white.png" alt="" width="24" height="24" />
+    <span class="shell-brand__word">BREACHMATRIX</span>
+  </a>
+  <nav class="site-nav" aria-label="Main">
+    <ul>
+      <li><a class="shell-tabs__link" href="#product">Product</a></li>
+      <li><a class="shell-tabs__link" href="#how">How it works</a></li>
+      <li><a class="shell-tabs__link" href="#security">Security</a></li>
+      <li><a class="shell-tabs__link" href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="shell-header__spacer"></div>
+  <div class="site-bar__end">
+    <button type="button" class="shell-icon-btn site-theme" id="theme-toggle" aria-label="Switch to dark theme">
+      <i data-lucide="moon" width="16" height="16" stroke-width="1.75"></i>
+      <i data-lucide="sun" width="16" height="16" stroke-width="1.75"></i>
     </button>
-    <div class="shell-header__spacer"></div>
-    <div class="profile-menu">
-      <button type="button" class="profile-trigger" aria-haspopup="menu" aria-expanded="false" aria-label="Account menu for ana" id="profile-trigger">
-        <span class="profile-avatar">AN</span>
-        <i data-lucide="chevron-down" width="12" height="12" stroke-width="2" class="profile-trigger__caret"></i>
-      </button>
-      <div class="profile-menu__panel" role="menu" id="profile-panel" hidden>
-        <div class="profile-menu__header">
-          <p class="profile-menu__name">ana</p>
-          <p class="profile-menu__sub">ana@corp.local</p>
-        </div>
-        <button type="button" class="nx-menu-item" role="menuitem" id="theme-item">
-          <span class="nx-menu-item__icon"><i data-lucide="moon" width="14" height="14" stroke-width="1.75"></i></span>
-          <span id="theme-label">Dark theme</span>
-        </button>
-        <button type="button" class="nx-menu-item" role="menuitem">
-          <span class="nx-menu-item__icon"><i data-lucide="settings" width="14" height="14" stroke-width="1.75"></i></span>
-          <span>Account settings</span>
-        </button>
-        <div class="nx-divider"></div>
-        <button type="button" class="nx-menu-item" role="menuitem">
-          <span class="nx-menu-item__icon"><i data-lucide="log-out" width="14" height="14" stroke-width="1.75"></i></span>
-          <span>Sign out</span>
-        </button>
+    <a class="ds-btn ds-btn--primary" href="#contact">Book a demo</a>
+  </div>
+</header>
+
+<main id="main" class="site-page app-route-stage" tabindex="-1">
+
+  <!-- 1. Hero. Left: eyebrow, the answer, lede, actions, typed prompt. Right: ice in empty space. -->
+  <section class="ice-hero" aria-labelledby="hero-title">
+    <div>
+      <p class="ds-label ice-eyebrow"><span>Example result</span><span>Safe simulation</span></p>
+      <h1 class="ice-h1" id="hero-title">Your defences held in 3 of 5 steps and <em>broke in 2</em>.</h1>
+      <p class="ice-lede">Breachmatrix runs safe test attacks through your defences and shows where they held and where they broke.</p>
+      <div class="ice-actions site-hero__actions">
+        <a class="ds-btn ds-btn--primary" href="#contact">Book a demo</a>
+        <a class="hk-link" href="#how">See how it works</a>
+      </div>
+      <p class="site-hero__prompt" data-prompt="breachmatrix run baseline"></p>
+    </div>
+    <div class="site-hero__ice">
+      <canvas aria-hidden="true" class="ice-patch" data-ice="drift" data-ice-amount="0.9"></canvas>
+    </div>
+  </section>
+
+  <!-- 2. The problem, in one sentence. -->
+  <section class="site-section" aria-labelledby="problem-title">
+    <p class="ds-label">The problem</p>
+    <h2 class="site-display" id="problem-title">Security tools are bought to catch attacks, but few teams can say which attacks they would miss.</h2>
+  </section>
+
+  <!-- 3. How it works: three numbered steps, each with a status line in the app's words. -->
+  <section class="site-section" id="how" aria-labelledby="how-title">
+    <div class="site-section__head">
+      <p class="ds-label">How it works</p>
+      <h2 class="site-h2" id="how-title">Three steps, from the first test to the first fix.</h2>
+    </div>
+    <ol class="site-steps">
+      <li class="ds-panel site-step">
+        <p class="ds-label">01</p>
+        <h3 class="site-step__title">Run safe test attacks</h3>
+        <p class="site-step__body">An agent on your network runs safe tests of real attacker techniques. Each one starts from an ordinary signed-in account.</p>
+        <p class="site-step__status">
+          <span class="hk-status is-ok">Executed</span>
+          <span class="hk-status is-run is-pulse">Running</span>
+          <span class="hk-status is-idle">Not executed</span>
+        </p>
+      </li>
+      <li class="ds-panel site-step">
+        <p class="ds-label">02</p>
+        <h3 class="site-step__title">Check what your tools saw</h3>
+        <p class="site-step__body">Breachmatrix asks your detection tools whether each attack raised an alert. You see every result, one line each.</p>
+        <p class="site-step__status">
+          <span class="hk-status is-ok">Detected</span>
+          <span class="hk-status is-run is-pulse">Checking…</span>
+          <span class="hk-status is-bad">Not detected</span>
+        </p>
+      </li>
+      <li class="ds-panel site-step">
+        <p class="ds-label">03</p>
+        <h3 class="site-step__title">Fix what got through</h3>
+        <p class="site-step__body">For each miss you get a detection query to add to your tools. Run the test again to confirm the fix.</p>
+        <p class="site-step__status">
+          <span class="hk-status is-bad">Not detected</span>
+          <span class="site-step__arrow" aria-hidden="true">→</span>
+          <span class="ds-sr-only">then, after the fix,</span>
+          <span class="hk-status is-ok">Detected</span>
+        </p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 4. The product, in a bordered panel. The screenshot follows the theme. -->
+  <section class="site-section" id="product" aria-labelledby="product-title">
+    <div class="site-section__head">
+      <p class="ds-label">Product</p>
+      <h2 class="site-h2" id="product-title">The answer comes first.</h2>
+      <p class="site-lede">The dashboard opens on one sentence: where your defences held, and where they broke. The numbers and the detail sit under it.</p>
+    </div>
+    <figure class="hk-panel site-shot">
+      <img class="site-light" src="img/dashboard-light.png" width="1440" height="900" loading="lazy" alt="The Breachmatrix dashboard. It reads: your defences held in 1 of 5 steps and broke in 3. Your tools detected 26 of the 33 attacks we ran. A dial shows a score of 51 of 100." />
+      <img class="site-dark" src="img/dashboard-dark.png" width="1440" height="900" loading="lazy" alt="The Breachmatrix dashboard. It reads: your defences held in 1 of 5 steps and broke in 3. Your tools detected 26 of the 33 attacks we ran. A dial shows a score of 51 of 100." />
+    </figure>
+  </section>
+
+  <!-- 5. The five steps of an attack, each as an ice band: dense where it held, a red gap where it broke. -->
+  <section class="site-section" id="security" aria-labelledby="steps-title">
+    <div class="site-section__head">
+      <p class="ds-label">Security</p>
+      <h2 class="site-h2" id="steps-title">The five steps of an attack on your network</h2>
+      <p class="site-lede">Every attack is a safe test run by a Breachmatrix agent, never a real one. Each test runs on its own; the steps show where in an attack it fits.</p>
+    </div>
+    <ol class="ice-steps" aria-label="The five steps of an attack">
+      <li class="ice-step">
+        <span class="ice-step-n ds-label">01<i aria-hidden="true"></i></span>
+        <span class="ice-step-name">Scout your systems</span>
+        <span class="ice-step-tech ds-id">Discovery</span>
+        <span class="ice-band site-band" aria-hidden="true" data-ice-band="held"><canvas aria-hidden="true" class="ice-patch"></canvas></span>
+        <span class="ice-step-state ds-label">All detected</span>
+      </li>
+      <li class="ice-step is-breach">
+        <span class="ice-step-n ds-label">02<i aria-hidden="true"></i></span>
+        <span class="ice-step-name">Steal passwords</span>
+        <span class="ice-step-tech ds-id">Credential access</span>
+        <span class="ice-band site-band" aria-hidden="true" data-ice-band="broken"><canvas aria-hidden="true" class="ice-patch"></canvas></span>
+        <span class="ice-step-state ds-label">2 missed of 7</span>
+      </li>
+      <li class="ice-step is-breach">
+        <span class="ice-step-n ds-label">03<i aria-hidden="true"></i></span>
+        <span class="ice-step-name">Spread to other computers</span>
+        <span class="ice-step-tech ds-id">Lateral movement</span>
+        <span class="ice-band site-band" aria-hidden="true" data-ice-band="broken"><canvas aria-hidden="true" class="ice-patch"></canvas></span>
+        <span class="ice-step-state ds-label">1 missed of 5</span>
+      </li>
+      <li class="ice-step">
+        <span class="ice-step-n ds-label">04<i aria-hidden="true"></i></span>
+        <span class="ice-step-name">Seize the login system</span>
+        <span class="ice-step-tech ds-id">Domain dominance</span>
+        <span class="ice-band site-band" aria-hidden="true" data-ice-band="held"><canvas aria-hidden="true" class="ice-patch"></canvas></span>
+        <span class="ice-step-state ds-label">All detected</span>
+      </li>
+      <li class="ice-step">
+        <span class="ice-step-n ds-label">05<i aria-hidden="true"></i></span>
+        <span class="ice-step-name">Leave a back door</span>
+        <span class="ice-step-tech ds-id">Persistence</span>
+        <span class="ice-band site-band" aria-hidden="true" data-ice-band="held"><canvas aria-hidden="true" class="ice-patch"></canvas></span>
+        <span class="ice-step-state ds-label">All detected</span>
+      </li>
+    </ol>
+    <details class="ice-how">
+      <summary class="ds-label">How this is measured</summary>
+      <p>Each test starts from an ordinary signed-in account, so the question is whether your tools notice an attacker who is already inside. A step holds when every test in it raised an alert. An attacker only needs one unnoticed way through a step.</p>
+    </details>
+  </section>
+
+  <!-- 6. Proof. PLACEHOLDER values only: replace each with an approved, sourced number before launch. -->
+  <section class="site-section" aria-labelledby="proof-title">
+    <div class="site-section__head">
+      <p class="ds-label">Proof</p>
+      <h2 class="site-h2" id="proof-title">Results from real assessments</h2>
+    </div>
+    <div class="hk-note"><i data-lucide="info" width="16" height="16"></i><span>Placeholder values. These numbers are not real yet and must be replaced before launch.</span></div>
+    <div class="site-proof">
+      <div class="site-proof__item">
+        <span class="hk-tag">PLACEHOLDER</span>
+        <p class="site-big">00</p>
+        <p class="ds-label">Attack techniques in the test library</p>
+      </div>
+      <div class="site-proof__item">
+        <span class="hk-tag">PLACEHOLDER</span>
+        <p class="site-big">00</p>
+        <p class="ds-label">Minutes from install to the first result</p>
+      </div>
+      <div class="site-proof__item">
+        <span class="hk-tag">PLACEHOLDER</span>
+        <p class="site-big">00</p>
+        <p class="ds-label">Missed attacks fixed and detected on rerun</p>
       </div>
     </div>
-  </header>
+  </section>
 
-  <div class="shell-body">
-    <!-- ── Icon rail (56px). Top group = work, bottom group = you. Ice between. ── -->
-    <nav class="shell-rail" aria-label="Main">
-      <div class="shell-rail__group">
-        <a href="#" class="shell-rail__item" aria-label="DIXIE"><i data-lucide="sparkles" width="18" height="18" stroke-width="1.75"></i><span class="shell-rail__tip" role="tooltip">DIXIE</span></a>
-        <a href="#" class="shell-rail__item" aria-label="Dashboard"><i data-lucide="layout-dashboard" width="18" height="18" stroke-width="1.75"></i><span class="shell-rail__tip" role="tooltip">Dashboard</span></a>
-        <a href="#" class="shell-rail__item" aria-label="Intel"><i data-lucide="radar" width="18" height="18" stroke-width="1.75"></i><span class="shell-rail__tip" role="tooltip">Intel</span></a>
-        <a href="#" class="shell-rail__item is-active" aria-label="Assessments" aria-current="page"><i data-lucide="crosshair" width="18" height="18" stroke-width="1.75"></i><span class="shell-rail__tip" role="tooltip">Assessments</span></a>
-        <a href="#" class="shell-rail__item" aria-label="Rules"><i data-lucide="shield-check" width="18" height="18" stroke-width="1.75"></i><span class="shell-rail__tip" role="tooltip">Rules</span></a>
-      </div>
-      <div class="shell-rail__ice"><canvas aria-hidden="true" class="ice-patch" data-ice="rise" data-ice-amount="0.8"></canvas></div>
-      <div class="shell-rail__group">
-        <a href="#" class="shell-rail__item" aria-label="Account"><i data-lucide="user" width="18" height="18" stroke-width="1.75"></i><span class="shell-rail__tip" role="tooltip">Account</span></a>
-        <a href="#" class="shell-rail__item" aria-label="Admin"><i data-lucide="lock" width="18" height="18" stroke-width="1.75"></i><span class="shell-rail__tip" role="tooltip">Admin</span></a>
-      </div>
+  <!-- 7. Final call to action: the page head, reused, with its ice in the empty space on the right. -->
+  <section class="ice-head site-cta" id="contact" aria-labelledby="contact-title">
+    <canvas aria-hidden="true" class="ice-patch ice-head__ice" data-ice="drift" data-ice-amount="0.9"></canvas>
+    <div class="ice-head__text">
+      <p class="ds-label ice-head__eyebrow">Contact</p>
+      <h2 class="ice-head__title" id="contact-title">See where your defences break</h2>
+      <p class="ice-head__lede">Book a demo. We will walk you through a full assessment, from the first test to the first fix.</p>
+    </div>
+    <div class="ice-head__actions">
+      <!-- TODO: point this at the real booking page or address once it exists. -->
+      <a class="ds-btn ds-btn--primary" href="#contact">Book a demo</a>
+    </div>
+  </section>
+
+  <!-- 8. Footer: quiet, mono. -->
+  <footer class="site-footer">
+    <p class="ds-label">Breachmatrix · autonomous security testing</p>
+    <nav aria-label="Footer">
+      <ul class="ds-label">
+        <li><a href="#product">Product</a></li>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </nav>
+    <p class="ds-id">© 2026 Breachmatrix</p>
+  </footer>
 
-    <main class="shell-main">
-      <!-- ── Section tabs (44px). Only when the section has 2+ pages. ── -->
-      <nav class="shell-tabs" aria-label="Assessments pages">
-        <span class="ds-label shell-tabs__section">Assessments</span>
-        <ul class="shell-tabs__list">
-          <li><a href="#" class="shell-tabs__link is-active" aria-current="page">Assessments</a></li>
-          <li><a href="#" class="shell-tabs__link">Runs</a></li>
-          <li><a href="#" class="shell-tabs__link">Attack suites</a></li>
-          <li><a href="#" class="shell-tabs__link">TTPs</a></li>
-        </ul>
-        <div class="shell-tabs__ice" aria-hidden="true"><canvas aria-hidden="true" class="ice-patch" data-ice="drift" data-ice-amount="0.9"></canvas></div>
-      </nav>
+</main>
 
-      <div class="shell-page">
-        <div class="page">
-
-          <!-- 1. Page head: eyebrow, title, one-line lede, actions. Ice drifts in from the right. -->
-          <header class="ice-head">
-            <canvas aria-hidden="true" class="ice-patch ice-head__ice" data-ice="drift" data-ice-amount="0.9"></canvas>
-            <div class="ice-head__text">
-              <p class="ds-label ice-head__eyebrow">Assessments</p>
-              <h1 class="ice-head__title">Assessments</h1>
-              <p class="ice-head__lede">Validate your defences against an attack suite, then review every run and report in one place.</p>
-            </div>
-            <div class="ice-head__actions">
-              <button type="button" class="ds-btn ds-btn--primary"><i data-lucide="plus" width="14" height="14"></i>New assessment</button>
-            </div>
-          </header>
-
-          <!-- 2. Toolbar: section title + count, spacer, search. -->
-          <div class="hk-toolbar">
-            <h2 class="hk-toolbar__title">All assessments<span class="hk-toolbar__count" data-scramble="3">3</span></h2>
-            <span class="hk-toolbar__spacer"></span>
-            <label class="hk-search">
-              <i data-lucide="search" width="15" height="15"></i>
-              <span class="ds-sr-only">Search assessments</span>
-              <input class="ds-input" type="search" placeholder="Search assessments…" />
-            </label>
-          </div>
-
-          <!-- 3. Filter tabs. -->
-          <div class="ds-tabs hk-tabs" role="tablist" aria-label="Filter by status">
-            <button type="button" class="ds-tab" role="tab" aria-selected="true">All</button>
-            <button type="button" class="ds-tab" role="tab" aria-selected="false">Not executed</button>
-            <button type="button" class="ds-tab" role="tab" aria-selected="false">Running</button>
-            <button type="button" class="ds-tab" role="tab" aria-selected="false">Failed</button>
-            <button type="button" class="ds-tab" role="tab" aria-selected="false">Executed</button>
-          </div>
-
-          <!-- 4. The table, in a panel. Status = ice mark + the app's own word. -->
-          <section class="hk-panel">
-            <div class="hk-table-scroll">
-              <table class="hk-table">
-                <thead><tr><th>Assessment</th><th>Attack suite</th><th>Status</th><th>Detection share</th><th style="width:96px">Runs</th></tr></thead>
-                <tbody>
-                  <tr class="is-clickable" tabindex="0">
-                    <td><span class="hk-cell-title">Q3 AD Resilience</span><span class="hk-cell-sub">Bundle_1780348743982</span></td>
-                    <td>15 techniques</td>
-                    <td><span class="hk-status is-ok">Executed</span></td>
-                    <td><span data-ice-meter="67" data-cells="16" data-tone="ok"></span> <span class="hk-num">67%</span></td>
-                    <td class="hk-num">5</td>
-                  </tr>
-                  <tr class="is-clickable" tabindex="0">
-                    <td><span class="hk-cell-title">DC Lateral Sweep</span><span class="hk-cell-sub">Bundle_1780348689534</span></td>
-                    <td>8 techniques</td>
-                    <td><span class="hk-status is-run is-pulse">Running</span></td>
-                    <td><span data-ice-meter="40" data-cells="16" data-tone="run"></span> <span class="hk-num">40%</span></td>
-                    <td class="hk-num">5</td>
-                  </tr>
-                  <tr class="is-clickable" tabindex="0">
-                    <td><span class="hk-cell-title">Credential Exposure</span><span class="hk-cell-sub">Bundle_1780383940420</span></td>
-                    <td>3 techniques</td>
-                    <td><span class="hk-status is-bad">Failed</span></td>
-                    <td><span data-ice-meter="0" data-cells="16"></span> <span class="hk-num">0%</span></td>
-                    <td class="hk-num">2</td>
-                  </tr>
-                  <tr class="is-clickable" tabindex="0">
-                    <td><span class="hk-cell-title">Golden Ticket Drill</span><span class="hk-cell-sub">Bundle_1780399911002</span></td>
-                    <td>4 techniques</td>
-                    <td><span class="hk-status is-idle">Not executed</span></td>
-                    <td><span class="hk-status is-idle">Not run</span></td>
-                    <td class="hk-num">0</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          <!-- 5. An empty state: ice behind, a typed command, one sentence, one action. -->
-          <div class="ice-state" style="margin-top:24px">
-            <canvas aria-hidden="true" class="ice-patch" data-ice="even" data-ice-amount="0.6"></canvas>
-            <div class="ice-state__body">
-              <p data-prompt="hosakai runs --list"></p>
-              <p class="ice-state__title">No runs yet</p>
-              <div class="ice-state__more">Run this assessment to see which attacks your tools detect.</div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </main>
-  </div>
-</div>
-
-<style>
-  /* Starter-only glue: which monogram shows per theme, and the page width.
-     In the React app Layout.tsx does both. */
-  html.light .brand-dark, html.dark .brand-light { display: none; }
-  .profile-menu__panel[hidden] { display: none; }
-</style>
-<script src="../js/icons.js"></script>
-<script src="../js/hosakai-ice.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/hosakai-ice.js"></script>
 <script>
-  // Profile menu: open/close, Esc, outside click, and the theme switch inside it.
+  // The theme switch: one button in the bar, remembered by HosakaiIce.setTheme.
   (function () {
-    var trigger = document.getElementById("profile-trigger"), panel = document.getElementById("profile-panel");
-    function setOpen(open) { panel.hidden = !open; trigger.setAttribute("aria-expanded", String(open)); trigger.classList.toggle("is-open", open); }
-    trigger.addEventListener("click", function () { setOpen(panel.hidden); });
-    document.addEventListener("keydown", function (e) { if (e.key === "Escape") setOpen(false); });
-    document.addEventListener("mousedown", function (e) { if (!e.target.closest(".profile-menu")) setOpen(false); });
-    function label() { document.getElementById("theme-label").textContent = document.documentElement.classList.contains("dark") ? "Light theme" : "Dark theme"; }
-    document.getElementById("theme-item").addEventListener("click", function () {
-      HosakaiIce.setTheme(document.documentElement.classList.contains("dark") ? "light" : "dark"); label(); setOpen(false);
+    var root = document.documentElement, btn = document.getElementById("theme-toggle");
+    function label() { btn.setAttribute("aria-label", root.classList.contains("dark") ? "Switch to light theme" : "Switch to dark theme"); }
+    btn.addEventListener("click", function () {
+      HosakaiIce.setTheme(root.classList.contains("dark") ? "light" : "dark"); label();
     });
     label();
   })();
