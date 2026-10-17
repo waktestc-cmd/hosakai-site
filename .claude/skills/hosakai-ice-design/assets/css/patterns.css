@@ -1,0 +1,467 @@
+/* HOSAKAI shared page patterns: status words with ice marks, panels, tables,
+   toolbars, tabs, icon buttons, links, pager, popups and form fields.
+   An exact copy of the approved Assessments kit (asm-kit.css), renamed asm- to hk-.
+   Do not change values here; compose them. */
+
+/* ── Status: an ice mark and a word ── */
+.hk-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 400 13px/1.3 var(--font-sans);
+  color: var(--fg-2);
+  white-space: nowrap;
+}
+
+/* The mark is an ice symbol (see src/components/ice/ice.css):
+   # done, + running (cycles while live), × failed or missed, . not run. */
+.hk-status::before {
+  content: ".";
+  flex: none;
+  width: 1ch;
+  font: 600 13px/1 var(--font-mono);
+  text-align: center;
+  color: var(--fg-3);
+}
+
+.hk-status.is-ok { color: var(--green-text); }
+.hk-status.is-ok::before { content: "#"; color: var(--green); }
+.hk-status.is-run { color: var(--amber-text); }
+.hk-status.is-run::before { content: "+"; color: var(--amber); }
+.hk-status.is-bad { color: var(--red-text); }
+.hk-status.is-bad::before { content: "×"; color: var(--red); }
+.hk-status.is-idle { color: var(--fg-3); }
+.hk-status.is-pulse::before { animation: ice-forming 1.4s steps(1) infinite; }
+.hk-status--mono { font: 400 12px/1.3 var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; }
+
+
+@media (prefers-reduced-motion: reduce) {
+  .hk-status.is-pulse::before { animation: none; }
+}
+
+/* ── Panels and tables ── */
+.hk-panel {
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-panel);
+}
+
+.hk-table-scroll {
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.hk-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.hk-table th {
+  height: 40px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  text-align: left;
+  font: 400 12px/1.4 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  white-space: nowrap;
+}
+
+.hk-table td {
+  height: 56px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+  font: 400 13px/1.45 var(--font-sans);
+  color: var(--fg-2);
+  min-width: 0;
+}
+
+.hk-table tbody tr:last-child td { border-bottom: 0; }
+.hk-table tr.is-clickable { cursor: pointer; }
+.hk-table tr.is-clickable:hover td,
+.hk-table tr.is-clickable:focus-visible td { background: var(--surface-2); }
+.hk-table tr.is-clickable:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+
+.hk-num {
+  font: 400 13px/1.4 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--fg-2);
+}
+
+.hk-cell-title {
+  display: block;
+  font: 500 14px/1.35 var(--font-sans);
+  color: var(--fg-1);
+  overflow-wrap: anywhere;
+}
+
+.hk-cell-sub {
+  display: block;
+  margin-top: 2px;
+  font: 400 12px/1.4 var(--font-mono);
+  color: var(--fg-3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Toolbar: title, count, search ── */
+.hk-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  margin-bottom: 12px;
+}
+
+.hk-toolbar__title {
+  margin: 0;
+  font: 500 16px/1.3 var(--font-sans);
+  color: var(--fg-1);
+}
+
+.hk-toolbar__count {
+  margin-left: 6px;
+  font: 400 13px/1 var(--font-mono);
+  color: var(--fg-3);
+}
+
+.hk-toolbar__spacer { flex: 1; }
+
+.hk-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 280px;
+  max-width: 100%;
+}
+
+.hk-search > svg {
+  position: absolute;
+  left: 12px;
+  color: var(--fg-3);
+  pointer-events: none;
+}
+
+.hk-search .ds-input {
+  width: 100%;
+  padding-left: 36px;
+}
+
+.ds-input:focus-visible,
+.hk-search .ds-input:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 1px;
+}
+
+.hk-tabs {
+  margin-bottom: 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.hk-tabs .ds-tab { flex: none; }
+.hk-tabs .ds-tab:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* ── Buttons ── */
+.hk-icon-btn {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--r-control);
+  background: transparent;
+  color: var(--fg-3);
+  cursor: pointer;
+}
+
+.hk-icon-btn:hover:not(:disabled) { border-color: var(--border); background: var(--surface-2); color: var(--fg-1); }
+.hk-icon-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+.hk-icon-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.hk-icon-btn.is-danger:hover:not(:disabled) { color: var(--red-text); border-color: var(--red); background: var(--red-surface); }
+
+.ds-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.ds-btn--sm { height: 30px; padding: 0 10px; }
+
+.hk-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: 400 13px/1.4 var(--font-sans);
+  color: var(--fg-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--border-control);
+  cursor: pointer;
+}
+
+.hk-link:hover { color: var(--fg-1); text-decoration-color: var(--fg-1); }
+.hk-link:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* ── Inline notices ── */
+.hk-note {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-panel);
+  background: var(--surface);
+  font: 400 13px/1.5 var(--font-sans);
+  color: var(--fg-2);
+}
+
+.hk-note > svg { flex: none; color: var(--fg-3); }
+.hk-note > span { flex: 1; min-width: 0; }
+.hk-note.is-error { border-color: var(--red); background: var(--red-surface); color: var(--fg-1); }
+.hk-note.is-error > svg { color: var(--red); }
+.hk-note.is-warn { border-color: var(--amber); background: var(--amber-surface); color: var(--fg-1); }
+.hk-note.is-warn > svg { color: var(--amber); }
+
+/* ── Pager ── */
+.hk-pager {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--border);
+  font: 400 12px/1.4 var(--font-mono);
+  color: var(--fg-3);
+}
+
+.hk-pager__controls { display: flex; align-items: center; gap: 12px; }
+.hk-pager__btns { display: flex; align-items: center; gap: 4px; }
+
+.hk-pager select {
+  height: 30px;
+  padding: 0 8px;
+  border: 1px solid var(--border-control);
+  border-radius: var(--r-control);
+  background: var(--surface);
+  font: 400 12px/1 var(--font-mono);
+  color: var(--fg-1);
+  cursor: pointer;
+}
+
+.hk-pager button,
+.hk-pager__page {
+  display: inline-grid;
+  place-items: center;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 6px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-control);
+  background: var(--surface);
+  font: 400 12px/1 var(--font-mono);
+  color: var(--fg-2);
+  cursor: pointer;
+}
+
+.hk-pager button:hover:not(:disabled) { background: var(--surface-2); color: var(--fg-1); }
+.hk-pager button:disabled { opacity: 0.4; cursor: not-allowed; }
+.hk-pager button:focus-visible,
+.hk-pager select:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+.hk-pager__page { border-color: var(--fg-1); color: var(--fg-1); cursor: default; }
+
+/* ── Popups ── */
+.hk-scrim {
+  align-items: center;
+  padding: 24px 16px;
+  animation: ds-fade-in var(--motion-slow) ease;
+}
+
+.hk-pop {
+  max-height: min(860px, 100%);
+}
+
+.hk-pop:focus { outline: none; }
+
+.hk-pop__head {
+  flex: none;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 16px 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.hk-pop__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-control);
+  color: var(--fg-2);
+}
+
+.hk-pop__icon.is-danger { border-color: var(--red); background: var(--red-surface); color: var(--red); }
+
+.hk-pop__titles { flex: 1; min-width: 0; padding-top: 4px; }
+
+.hk-pop__title {
+  margin: 0;
+  font: 500 16px/1.35 var(--font-sans);
+  color: var(--fg-1);
+  overflow-wrap: anywhere;
+}
+
+.hk-pop__sub {
+  margin: 4px 0 0;
+  font: 400 12px/1.4 var(--font-mono);
+  color: var(--fg-3);
+}
+
+.hk-pop__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font: 400 14px/1.55 var(--font-sans);
+  color: var(--fg-2);
+}
+
+.hk-pop__body > p { margin: 0; }
+.hk-pop__body strong { font-weight: 500; color: var(--fg-1); }
+
+.hk-pop__foot {
+  flex: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 20px;
+  border-top: 1px solid var(--border);
+}
+
+.hk-pop__foot-note {
+  flex: 1;
+  min-width: 0;
+  font: 400 12px/1.4 var(--font-mono);
+  color: var(--fg-3);
+}
+
+/* ── Form fields ── */
+.hk-field { display: grid; gap: 6px; min-width: 0; }
+
+.hk-field__label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.hk-field__hint {
+  font: 400 12px/1.4 var(--font-sans);
+  color: var(--fg-3);
+}
+
+.hk-field .ds-input,
+.hk-field select.ds-input,
+.hk-field textarea.ds-input { width: 100%; box-sizing: border-box; }
+
+.hk-field textarea.ds-input {
+  height: auto;
+  min-height: 84px;
+  padding: 10px 12px;
+  font: 400 13px/1.5 var(--font-mono);
+  resize: vertical;
+}
+
+.hk-field select.ds-input { cursor: pointer; }
+.hk-field .ds-input:focus { outline: 2px solid var(--focus); outline-offset: 1px; }
+
+.hk-error-text {
+  margin: 0;
+  font: 400 13px/1.45 var(--font-sans);
+  color: var(--red-text);
+}
+
+/* ── Chips used as filters ── */
+.hk-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.hk-chip {
+  height: 28px;
+  padding: 0 10px;
+  border: 1px solid var(--border-control);
+  border-radius: var(--r-chip);
+  background: transparent;
+  font: 400 12px/1 var(--font-mono);
+  letter-spacing: 0.04em;
+  color: var(--fg-2);
+  cursor: pointer;
+}
+
+.hk-chip:hover { color: var(--fg-1); background: var(--surface-2); }
+.hk-chip[aria-pressed="true"] { border-color: var(--fg-1); background: var(--fg-1); color: var(--bg); }
+.hk-chip:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+.hk-tag {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 6px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-chip);
+  font: 400 12px/1 var(--font-mono);
+  letter-spacing: 0.04em;
+  color: var(--fg-3);
+  white-space: nowrap;
+}
+
+/* ── Toasts without a library (HosakaiIce.toast). Same card as the React
+   toaster (components.css .ds-toast); this only adds the stack. ── */
+.hk-toasts {
+  position: fixed;
+  left: calc(var(--rail-w) + 16px);
+  bottom: 16px;
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: min(356px, calc(100vw - var(--rail-w) - 32px));
+}
+
+.hk-toast {
+  position: relative;
+  width: 100%;
+  animation: ds-fade-in var(--motion-base) ease;
+}
+
+.hk-toast__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--r-control);
+  color: var(--fg-3);
+}
+
+.hk-toast__close:hover { background: var(--surface-2); color: var(--fg-1); }
+.hk-toast__close:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hk-toast { animation: none; }
+}

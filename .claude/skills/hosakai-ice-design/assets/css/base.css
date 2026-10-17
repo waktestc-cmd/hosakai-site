@@ -1,0 +1,17 @@
+/* HOSAKAI base reset. Load FIRST, before tokens.css.
+   The app gets these from Tailwind's preflight; a page without Tailwind needs
+   this file or it will pick up browser margins, serif buttons and the like. */
+*, *::before, *::after { box-sizing: border-box; border: 0 solid var(--border, currentColor); }
+html, body { height: 100%; margin: 0; }
+html { -webkit-text-size-adjust: 100%; tab-size: 4; }
+body { line-height: inherit; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd, pre { margin: 0; }
+h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
+ol, ul { margin: 0; padding: 0; list-style: none; }
+a { color: inherit; text-decoration: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; margin: 0; }
+button, [role="button"] { cursor: pointer; background: transparent; }
+img, svg, video, canvas { display: block; vertical-align: middle; }
+img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; text-indent: 0; border-color: inherit; }
+[hidden] { display: none !important; }

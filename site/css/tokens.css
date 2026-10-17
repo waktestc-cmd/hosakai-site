@@ -1,0 +1,218 @@
+/* HOSAKAI tokens. The one place colours, type, shape, motion and layers are
+   set. Values and their contrast checks: docs/redesign/DESIGN_SYSTEM.md.
+
+   The second half maps the older names (--hk-*, --fg1, --critical, the
+   shadcn HSL set) onto these, so every screen follows without edits. */
+
+:root,
+html.light {
+  /* Colour (light) */
+  /* Neutrals: the HOSAKAI grey ramp. */
+  --bg: #FFFFFF;
+  --bg-sunk: #F6F6F7;      /* the frame (rail, tab bar) and wells */
+  --well: #F6F6F7;         /* code, output and query boxes inside panels */
+  --surface: #FFFFFF;
+  --surface-2: #F6F6F7;
+  --surface-3: #ECECEE;
+  --border: #DEDEDF;
+  --border-control: #7C7C84;   /* controls need 3:1; the ramp's #C6C6CA is 1.7:1 */
+  --fg-1: #0C0C0E;
+  --fg-2: #52525A;
+  --fg-3: #64646B;         /* the ramp's #74747C is 3.9:1 on --surface-3 */
+  --fg-4: #9D9DA4;         /* disabled only, never for text that must be read */
+  --accent: #050506;
+  --accent-fg: #FFFFFF;
+  --red: #E50914;
+  --red-text: #B20710;
+  --red-surface: #FBE3E4;
+  /* Green and amber: operational states on working pages (assessments, runs,
+     agents, admin). Never on the dashboard's detected/missed story. */
+  --green: #1A7F4B;
+  --green-text: #166B3F;
+  --green-surface: #E3F4EA;
+  --amber: #B86E00;
+  --amber-text: #8A5200;
+  --amber-surface: #FBEFD9;
+  --focus: #141417;
+  --scrim: rgba(12, 12, 14, 0.5);
+  --shadow-popup: 0 12px 40px rgba(12, 12, 14, 0.14), 0 2px 6px rgba(12, 12, 14, 0.06);
+
+  /* Type */
+  --font-sans: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-display: var(--font-sans);
+  --font-heading: var(--font-sans);
+
+  /* Shape */
+  --r-chip: 2px;
+  --r-control: 4px;
+  --r-panel: 6px;
+
+  /* Motion */
+  --motion-fast: 120ms;
+  --motion-base: 200ms;
+  --motion-slow: 320ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Layers */
+  --z-sticky: 10;
+  --z-rail: 20;
+  --z-header: 30;
+  --z-dixie: 40;
+  --z-popover: 50;
+  --z-popup: 60;
+  --z-toast: 70;
+
+  /* Layout */
+  --header-h: 56px;
+  --rail-w: 56px;
+}
+
+html.dark,
+.hk-theme-dark {
+  --bg: #000000;
+  --bg-sunk: #000000;
+  --well: #000000;
+  --fg-4: #6A6A66;
+  --accent: #F5F5F1;
+  --accent-fg: #000000;
+  --surface: #0B0B0B;
+  --surface-2: #141414;
+  --surface-3: #1C1C1C;
+  --border: #2A2A2A;
+  --border-control: #6A6A66;
+  --fg-1: #F5F5F1;
+  --fg-2: #C8C8C3;
+  --fg-3: #9C9C97;
+  --red-text: #FF4D57;
+  --red-surface: #3A0B10;
+  --green: #3DD68C;
+  --green-text: #3DD68C;
+  --green-surface: #0B2A1A;
+  --amber: #F5A524;
+  --amber-text: #F5A524;
+  --amber-surface: #2E2108;
+  --focus: #F5F5F1;
+  --scrim: rgba(0, 0, 0, 0.72);
+  --shadow-popup: none;
+}
+
+/* ── Older names, mapped ─────────────────────────────────────────────────────
+   Success maps to green, warnings and high/medium severity to amber, failure
+   to red; blue and slate collapse to neutrals. Page owners swap these for the
+   new names as they restyle. */
+:root,
+html.light,
+html.dark,
+.hk-theme-dark {
+  --hk-font-display: var(--font-sans);
+  --hk-font-sans: var(--font-sans);
+  --hk-font-mono: var(--font-mono);
+
+  --hk-white: #FFFFFF;
+  --hk-black: #000000;
+  --hk-bg: var(--bg);
+  --hk-bg-sunk: var(--bg);
+  --hk-surface: var(--surface);
+  --hk-surface-2: var(--surface-2);
+  --hk-surface-3: var(--surface-3);
+  --hk-border: var(--border);
+  --hk-border-strong: var(--border-control);
+  --hk-fg1: var(--fg-1);
+  --hk-fg2: var(--fg-2);
+  --hk-fg3: var(--fg-3);
+  --hk-fg4: var(--fg-3);
+  --hk-accent: var(--fg-1);
+  --hk-accent-fg: var(--bg);
+  --hk-secured: var(--green-text);
+  --hk-signal: var(--fg-2);
+  --hk-critical: var(--red-text);
+  --hk-high: var(--amber-text);
+  --hk-medium: var(--amber-text);
+  --hk-low: var(--fg-3);
+  --hk-agent-accent: var(--fg-1);
+  --hk-agent-on-accent: var(--bg);
+  --hk-focus: var(--focus);
+
+  --hk-r-xs: var(--r-chip);
+  --hk-r-sm: var(--r-control);
+  --hk-r-md: var(--r-panel);
+  --hk-r-lg: var(--r-panel);
+  --hk-r-modal: var(--r-panel);
+  --hk-r-full: 999px;
+  --hk-shadow: none;
+  --hk-shadow-md: none;
+  --hk-shadow-lg: var(--shadow-popup);
+
+  --bg-sunk: var(--bg);
+  --border-hairline: var(--border);
+  --border-strong: var(--border-control);
+  --fg1: var(--fg-1);
+  --fg2: var(--fg-2);
+  --fg3: var(--fg-3);
+  --fg4: var(--fg-3);
+  --accent: var(--fg-1);
+  --accent-fg: var(--bg);
+  --accent-inv: var(--fg-1);
+  --accent-inv-fg: var(--bg);
+  --info: var(--fg-3);
+  --signal: var(--fg-2);
+  --secured: var(--green-text);
+  --critical: var(--red-text);
+  --high: var(--amber-text);
+  --medium: var(--amber-text);
+  --low: var(--fg-3);
+  --agent-accent: var(--fg-1);
+  --agent-on-accent: var(--bg);
+  --r-xs: var(--r-chip);
+  --r-sm: var(--r-control);
+  --r-md: var(--r-panel);
+  --r-lg: var(--r-panel);
+  --r-modal: var(--r-panel);
+  --r-full: 999px;
+  --shadow: none;
+  --shadow-md: none;
+  --shadow-lg: var(--shadow-popup);
+  --motion-instant: var(--motion-fast);
+}
+
+/* shadcn components (dialogs, toasts, selects) read HSL triples. */
+:root,
+html.light {
+  --background: 0 0% 100%;
+  --foreground: 240 8% 5%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 8% 5%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 8% 5%;
+  --primary: 240 4% 2%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 240 5% 96%;
+  --secondary-foreground: 240 8% 5%;
+  --muted: 240 5% 96%;
+  --muted-foreground: 240 3% 41%;
+  --destructive: 357 92% 47%;
+  --destructive-foreground: 0 0% 100%;
+  --input: 240 3% 50%;
+  --ring: 240 6% 8%;
+  --radius: 0.375rem;
+}
+
+html.dark {
+  --background: 0 0% 0%;
+  --foreground: 60 17% 95%;
+  --card: 0 0% 4%;
+  --card-foreground: 60 17% 95%;
+  --popover: 0 0% 11%;
+  --popover-foreground: 60 17% 95%;
+  --primary: 60 17% 95%;
+  --primary-foreground: 0 0% 0%;
+  --secondary: 0 0% 8%;
+  --secondary-foreground: 60 17% 95%;
+  --muted: 0 0% 8%;
+  --muted-foreground: 60 2% 60%;
+  --destructive: 357 92% 47%;
+  --destructive-foreground: 0 0% 100%;
+  --input: 60 2% 41%;
+  --ring: 60 17% 95%;
+}

@@ -1,0 +1,279 @@
+<!doctype html>
+<!--
+  HOSAKAI result sheet: one test result, everything in view at once.
+  Captured from the approved app (DCSync, a missed detection) and converted to
+  plain HTML. Change the CONTENT only; keep every class and the box order.
+  - Ice band state: data-ice-band="held" (detected) | "broken" (not detected) | "open" (pending)
+  - Verdict steps: .rdm-verdict__step is-ok | is-run | is-bad | (none = idle)
+  - The sheet must not scroll at >= 980x640; boxes scroll inside themselves.
+-->
+<html lang="en" class="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DCSync · HOSAKAI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/tokens.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/ice-kit.css" />
+  <link rel="stylesheet" href="../css/patterns.css" />
+  <link rel="stylesheet" href="../css/result-sheet.css" />
+</head>
+<body>
+<div role="presentation" class="ds-scrim rdm-overlay" data-popup>
+<div role="dialog" aria-modal="true" aria-label="DCSync detail" class="rdm-sheet" tabindex="-1">
+<header class="rdm-head">
+<div class="rdm-head__bar">
+<div class="rdm-head__tags">
+<code class="rdm-mitre-id">T1003.006</code>
+<span class="ds-label">Credential Access</span>
+</div>
+<div class="rdm-head__controls">
+<button type="button" aria-label="Previous technique" class="hk-icon-btn">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left">
+<path d="m15 18-6-6 6-6">
+</path>
+</svg>
+</button>
+<span class="rdm-position">02 / 09</span>
+<button type="button" aria-label="Next technique" class="hk-icon-btn">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right">
+<path d="m9 18 6-6-6-6">
+</path>
+</svg>
+</button>
+<span class="rdm-divider" aria-hidden="true">
+</span>
+<button type="button" aria-label="Close" class="hk-icon-btn">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x">
+<path d="M18 6 6 18">
+</path>
+<path d="m6 6 12 12">
+</path>
+</svg>
+</button>
+</div>
+</div>
+<div class="rdm-head__main">
+<h2 class="rdm-title">DCSync</h2>
+<dl class="rdm-meta">
+<div>
+<dt class="ds-label">Affected object</dt>
+<dd>krbtgt</dd>
+</div>
+<div>
+<dt class="ds-label">Started</dt>
+<dd>29 Jul 08:22</dd>
+</div>
+<div>
+<dt class="ds-label">Duration</dt>
+<dd>1m 9s</dd>
+</div>
+<div>
+<dt class="ds-label">Tool</dt>
+<dd>secretsdump.py</dd>
+</div>
+</dl>
+<div class="rdm-verdict" aria-label="Completed, then Not detected">
+<span class="rdm-verdict__step is-ok">
+<i aria-hidden="true">
+</i>Completed</span>
+<span class="rdm-verdict__arrow" aria-hidden="true">→</span>
+<span class="rdm-verdict__step is-bad">
+<i aria-hidden="true">
+</i>Not detected</span>
+</div>
+</div>
+</header>
+<div class="ice-band is-broken rdm-band" aria-hidden="true" data-ice-band="broken">
+<canvas aria-hidden="true" class="ice-patch">
+</canvas>
+</div>
+<div class="rdm-body">
+<section class="rdm-col rdm-col--exec" aria-labelledby="rdm-execution-heading">
+<div class="rdm-col__head">
+<h3 id="rdm-execution-heading" class="rdm-col__title">Execution evidence</h3>
+</div>
+<div class="rdm-box rdm-box--fit" style="--rdm-accent: var(--green);">
+<div class="rdm-box__head">
+<span class="ds-label">Execution details</span>
+</div>
+<div class="rdm-box__body">
+<p class="rdm-desc" title="Abuses directory replication (DRSUAPI) to pull password hashes for any principal directly from a domain controller.">Abuses directory replication (DRSUAPI) to pull password hashes for any principal directly from a domain controller.</p>
+<div class="rdm-command">
+<p class="rdm-command__line" data-prompt="secretsdump.py -just-dc corp.local/admin@dc01">
+</p>
+</div>
+<div class="rdm-fields rdm-fields--4">
+<div class="rdm-field">
+<div class="ds-label rdm-field-label">Attack</div>
+<div class="rdm-field-value ">DCSync</div>
+</div>
+<div class="rdm-field">
+<div class="ds-label rdm-field-label">Attack result</div>
+<div class="rdm-field-value rdm-field-value--strong" style="color: var(--green-text);">SUCCESS</div>
+</div>
+<div class="rdm-field">
+<div class="ds-label rdm-field-label">Attack start</div>
+<div class="rdm-field-value ">29 Jul 08:22</div>
+</div>
+<div class="rdm-field">
+<div class="ds-label rdm-field-label">Attack end</div>
+<div class="rdm-field-value ">29 Jul 08:23</div>
+</div>
+<div class="rdm-field">
+<div class="ds-label rdm-field-label">Duration</div>
+<div class="rdm-field-value ">1m 9s</div>
+</div>
+<div class="rdm-field">
+<div class="ds-label rdm-field-label">Affected object</div>
+<div class="rdm-field-value ">krbtgt</div>
+</div>
+<div class="rdm-field">
+<div class="ds-label rdm-field-label">Outcome</div>
+<div class="rdm-field-value ">Hashes replicated</div>
+</div>
+<div class="rdm-field">
+<div class="ds-label rdm-field-label">MITRE ID</div>
+<div class="rdm-field-value ">T1003.006</div>
+</div>
+</div>
+</div>
+</div>
+<div class="rdm-pair">
+<div class="rdm-box rdm-box--grow rdm-box--well">
+<div class="rdm-box__head">
+<span class="ds-label">Output</span>
+<button type="button" class="ds-btn ds-btn--secondary ds-btn--sm rdm-copy-btn">
+<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy">
+<rect width="14" height="14" x="8" y="8" rx="2" ry="2">
+</rect>
+<path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2">
+</path>
+</svg>Copy</button>
+</div>
+<div class="rdm-box__body">
+<pre class="rdm-scroll rdm-pre" tabindex="0" aria-label="Command output">Impacket secretsdump v0.13.1
+[*] Dumping Domain Credentials (domain\uid:rid:lmhash:nthash)
+[*] Using the DRSUAPI method to get NTDS.DIT secrets
+krbtgt:502:aad3b435b51404ee:6f1c...b92d:::
+[*] Cleaning up...</pre>
+</div>
+</div>
+<div class="rdm-box rdm-box--grow">
+<div class="rdm-box__head">
+<span class="ds-label">Assessment</span>
+</div>
+<div class="rdm-box__body">
+<p class="ds-label rdm-agent-meta">Agent-generated · not evidence</p>
+<div class="rdm-scroll rdm-prose" tabindex="0" aria-label="Assessment">Replication succeeded against DC01 and krbtgt was recovered. No alert fired in the checking window — this is a gap.</div>
+</div>
+</div>
+</div>
+<details class="rdm-raw">
+<summary>
+<span class="ds-label">Raw payload</span>
+<button type="button" class="ds-btn ds-btn--secondary ds-btn--sm rdm-copy-btn">
+<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy">
+<rect width="14" height="14" x="8" y="8" rx="2" ry="2">
+</rect>
+<path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2">
+</path>
+</svg>Copy</button>
+</summary>
+<pre class="rdm-scroll rdm-pre" tabindex="0" aria-label="Raw payload">{
+  "command": "secretsdump.py -just-dc corp.local/admin@dc01",
+  "attack": "DCSync",
+  "attackResult": "SUCCESS",
+  "detectionResult": "NOT_DETECTED",
+  "outcome": "Hashes replicated",
+  "affectedObject": "krbtgt",
+  "output": "Impacket secretsdump v0.13.1\n[*] Dumping Domain Credentials (domain\\uid:rid:lmhash:nthash)\n[*] Using the DRSUAPI method to get NTDS.DIT secrets\nkrbtgt:502:aad3b435b51404ee:6f1c...b92d:::\n[*] Cleaning up...",
+  "analysis": "Replication succeeded against DC01 and krbtgt was recovered. No alert fired in the checking window — this is a gap.",
+  "attackStartTime": "2026-07-29T08:22:00Z",
+  "attackEndTime": "2026-07-29T08:23:09Z",
+  "mitreId": "T1003.006",
+  "tactic": "Credential Access"
+}</pre>
+</details>
+</section>
+<section class="rdm-col rdm-col--det" aria-labelledby="rdm-detection-heading">
+<div class="rdm-col__head">
+<h3 id="rdm-detection-heading" class="rdm-col__title">Detection evidence</h3>
+<span class="hk-status hk-status--mono is-bad">Not detected</span>
+</div>
+<div class="rdm-box rdm-box--fit" style="--rdm-accent: var(--red);">
+<div class="rdm-box__head">
+<span class="ds-label">Provider check</span>
+</div>
+<div class="rdm-box__body">
+<p class="rdm-desc rdm-desc--full">No matching alert was found during the configured checking window. This is a potential detection gap that requires investigation; it does not by itself prove the environment is fully exposed.</p>
+<div class="rdm-fields rdm-fields--auto">
+<div class="rdm-field">
+<div class="ds-label rdm-field-label">Detection result</div>
+<div class="rdm-field-value rdm-field-value--strong" style="color: var(--red-text);">NOT_DETECTED</div>
+</div>
+<div class="rdm-field">
+<div class="ds-label rdm-field-label">Alert ID</div>
+<div class="rdm-field-value ">—</div>
+</div>
+<div class="rdm-field">
+<div class="ds-label rdm-field-label">Last checked</div>
+<div class="rdm-field-value ">29 Jul 08:31</div>
+</div>
+</div>
+</div>
+</div>
+<div class="rdm-slot rdm-slot--query">
+<div class="rdm-box rdm-box--grow" style="--rdm-accent: var(--red);">
+<div class="rdm-box__head">
+<span class="ds-label">Detection query</span>
+<span class="rdm-query-badge" style="color: var(--red-text);">No rule</span>
+</div>
+<div class="rdm-box__body">
+<div class="rdm-query">
+<p class="rdm-desc rdm-desc--full">No alert fired for this successful attack. Generate a KQL custom-detection query from the execution evidence to close the gap.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="rdm-box rdm-box--grow rdm-box--well rdm-box--short">
+<div class="rdm-box__head">
+<span class="ds-label">Provider response</span>
+</div>
+<div class="rdm-box__body">
+<pre class="rdm-scroll rdm-pre" tabindex="0" aria-label="Provider response">200 OK · 0 alerts in window
+window: 08:22–08:31 (9m)
+queries run: 6</pre>
+</div>
+</div>
+</section>
+</div>
+<footer class="rdm-foot">
+<span class="rdm-key-hints">
+<kbd class="ds-kbd">J</kbd> next <kbd class="ds-kbd">K</kbd> previous <kbd class="ds-kbd">Esc</kbd> close</span>
+<button type="button" class="ds-btn ds-btn--primary">
+<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles">
+<path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z">
+</path>
+<path d="M20 3v4">
+</path>
+<path d="M22 5h-4">
+</path>
+<path d="M4 17v2">
+</path>
+<path d="M5 18H3">
+</path>
+</svg>Generate query</button>
+</footer>
+</div>
+</div>
+<script src="../js/icons.js"></script>
+<script src="../js/hosakai-ice.js"></script>
+<script>
+  // Esc / close button / scrim click close it; J and K would step to the next and previous result.
+  HosakaiIce.openPopup(document.querySelector("[data-popup]"));
+</script>
+</body>
+</html>

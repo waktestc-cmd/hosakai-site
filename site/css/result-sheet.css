@@ -1,0 +1,443 @@
+/* Result detail: one sheet with everything about a technique in view at once.
+
+   Why it is laid out like this (kept from the original design):
+   - The header answers first: what ran and whether it was seen
+     ("COMPLETED → NOT DETECTED"), then where and when.
+   - Left column, what the attack did; right column, whether the defences saw
+     it. Reading left to right follows the story: cause, then effect.
+   - Fixed boxes in a grid, so a reader can take in the whole result at a
+     glance and step through techniques with J and K without losing their place.
+
+   The original bug: the boxes were fixed AND cut their overflow, so long output
+   could not be read. Now the boxes still hold their place, and anything long
+   scrolls inside its own box. The sheet itself never scrolls (except on short
+   or narrow screens, where the columns stack). */
+
+.rdm-overlay.ds-scrim {
+  align-items: stretch;
+  padding: 16px;
+  animation: ds-fade-in var(--motion-slow) ease;
+}
+
+.rdm-sheet {
+  display: flex;
+  flex-direction: column;
+  width: min(1600px, 100%);
+  margin: 0 auto;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--r-panel);
+  background: var(--bg-sunk);
+  color: var(--fg-1);
+  box-shadow: var(--shadow-popup);
+}
+
+.rdm-sheet:focus { outline: none; }
+
+/* ── Header: the answer ── */
+.rdm-head {
+  flex: none;
+  padding: 12px 20px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.rdm-head__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.rdm-head__tags { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.rdm-head__controls { display: flex; align-items: center; gap: 4px; }
+.rdm-position { min-width: 64px; text-align: center; font: 400 12px/1 var(--font-mono); color: var(--fg-3); }
+.rdm-divider { width: 1px; height: 20px; margin: 0 6px; background: var(--border); }
+
+.rdm-mitre-id {
+  padding: 3px 6px;
+  border: 1px solid var(--border-control);
+  border-radius: var(--r-chip);
+  font: 400 12px/1.2 var(--font-mono);
+  color: var(--fg-1);
+}
+
+/* Title, where and when, then the verdict at the far right: one line. */
+.rdm-head__main {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 10px 32px;
+  margin-top: 8px;
+}
+
+.rdm-title {
+  margin: 0;
+  min-width: 0;
+  max-width: 100%;
+  font: 500 26px/1.2 var(--font-sans);
+  letter-spacing: -0.015em;
+  color: var(--fg-1);
+  overflow-wrap: anywhere;
+}
+
+/* The verdict, the largest mono line on the sheet. */
+.rdm-verdict {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-control);
+  background: var(--well);
+  font: 500 14px/1 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.rdm-verdict__step { display: inline-flex; align-items: center; gap: 8px; color: var(--fg-2); }
+/* Ice symbols, as everywhere: # held, × broken, + in progress, . not yet. */
+.rdm-verdict__step i { font-style: normal; font-weight: 600; color: var(--fg-3); }
+.rdm-verdict__step i::before { content: "."; }
+.rdm-verdict__step.is-ok { color: var(--green-text); }
+.rdm-verdict__step.is-ok i { color: var(--green); }
+.rdm-verdict__step.is-ok i::before { content: "#"; }
+.rdm-verdict__step.is-bad { color: var(--red-text); }
+.rdm-verdict__step.is-bad i { color: var(--red); }
+.rdm-verdict__step.is-bad i::before { content: "×"; }
+.rdm-verdict__step.is-run { color: var(--amber-text); }
+.rdm-verdict__step.is-run i { color: var(--amber); }
+.rdm-verdict__step.is-run i::before { content: "+"; }
+.rdm-verdict__arrow { color: var(--fg-3); }
+
+.rdm-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  margin: 0;
+  padding-bottom: 2px;
+}
+
+.rdm-meta > div { display: grid; gap: 4px; min-width: 0; }
+.rdm-meta dt { margin: 0; }
+.rdm-meta dd { margin: 0; font: 400 13px/1.3 var(--font-mono); color: var(--fg-1); overflow-wrap: anywhere; }
+
+/* The ice band under the header. */
+.rdm-band {
+  flex: none;
+  border-bottom: 1px solid var(--border);
+  background: var(--well);
+}
+
+/* ── Body: two evidence columns ── */
+.rdm-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+  gap: 16px;
+  padding: 14px 20px 16px;
+}
+
+.rdm-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  min-height: 0;
+  /* Safety net: if the boxes ever need more than the screen (a short window
+     with the raw payload open), the column scrolls rather than cutting. */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.rdm-col__head {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 22px;
+}
+
+.rdm-col__title { margin: 0; font: 500 15px/1.3 var(--font-sans); color: var(--fg-1); }
+
+/* ── Box ── */
+.rdm-box {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--r-panel);
+  background: var(--surface);
+  overflow: hidden;
+  box-shadow: inset 2px 0 0 var(--rdm-accent, transparent);
+}
+
+.rdm-box__head {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 38px;
+  padding: 0 8px 0 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.rdm-box__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 12px 14px 14px;
+}
+
+/* Sized to its content. */
+.rdm-box--fit { flex: none; }
+
+/* Takes the room that is left, and scrolls inside. */
+.rdm-box--grow { flex: 1 1 0; min-height: 112px; }
+.rdm-box--short { flex: 0.6 1 0; min-height: 96px; }
+
+/* Verbatim text sits in a darker well. */
+.rdm-box--well .rdm-box__body { padding: 0; background: var(--well); }
+
+.rdm-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.rdm-scroll:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+
+/* Terminal text keeps its columns: it does not wrap, it scrolls sideways
+   inside its box. */
+.rdm-pre {
+  margin: 0;
+  padding: 12px 14px;
+  font: 400 12px/1.65 var(--font-mono);
+  color: var(--fg-2);
+  white-space: pre;
+  tab-size: 4;
+}
+
+.rdm-prose { font: 400 14px/1.6 var(--font-sans); color: var(--fg-2); }
+
+/* Short text above the fields; long text scrolls in place (about 3 lines). */
+.rdm-desc {
+  margin: 0;
+  max-height: calc(1.55em * 3);
+  overflow: auto;
+  font: 400 14px/1.55 var(--font-sans);
+  color: var(--fg-2);
+}
+
+.rdm-desc { flex: none; }
+.rdm-desc.rdm-desc--full { max-height: none; overflow: visible; }
+
+.rdm-agent-meta {
+  flex: none;
+  margin: 0;
+  padding-left: 10px;
+  border-left: 2px solid var(--border-control);
+}
+
+/* The command, as it was typed. */
+.rdm-command {
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-control);
+  background: var(--well);
+}
+
+.rdm-command__line {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  align-items: flex-start;
+  color: var(--fg-1);
+}
+
+/* ── Fields ── */
+.rdm-fields { display: grid; gap: 12px 16px; }
+.rdm-fields--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.rdm-fields--auto { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+.rdm-field { min-width: 0; }
+.rdm-field-label { margin-bottom: 4px; }
+.rdm-field-value { font: 400 13px/1.4 var(--font-mono); color: var(--fg-1); overflow-wrap: anywhere; }
+.rdm-field-value--strong { font-weight: 500; }
+.rdm-field-hint { margin-top: 3px; font: 400 12px/1.4 var(--font-sans); color: var(--fg-3); }
+
+/* Output beside the agent's assessment; output gets the larger share. */
+.rdm-pair {
+  flex: 1 1 0;
+  min-height: 140px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: 10px;
+}
+
+.rdm-pair.is-single { grid-template-columns: minmax(0, 1fr); }
+.rdm-pair > .rdm-box { min-height: 0; }
+
+/* ── Raw payload: closed by default, opens in place ── */
+.rdm-raw {
+  flex: none;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--r-panel);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.rdm-raw > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 38px;
+  padding: 0 8px 0 14px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.rdm-raw > summary::-webkit-details-marker { display: none; }
+.rdm-raw > summary .ds-label::before { content: "+ "; color: var(--fg-3); }
+.rdm-raw[open] > summary .ds-label::before { content: "− "; }
+.rdm-raw > summary:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+.rdm-raw:not([open]) .rdm-copy-btn { display: none; }
+
+.rdm-raw[open] > .rdm-pre {
+  max-height: min(20vh, 180px);
+  overflow: auto;
+  border-top: 1px solid var(--border);
+  background: var(--well);
+}
+
+.rdm-copy-btn { flex: none; }
+
+.rdm-detection-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 400 12px/1 var(--font-sans);
+  color: var(--fg-3);
+}
+
+/* ── Detection query ── */
+.rdm-slot { display: flex; flex-direction: column; min-height: 0; scroll-margin: 16px; }
+.rdm-slot--query { flex: 1 1 0; min-height: 140px; }
+.rdm-slot > .rdm-box { flex: 1 1 auto; }
+
+.rdm-query { display: flex; flex-direction: column; gap: 10px; flex: 1 1 auto; min-height: 0; }
+.rdm-query-badge { font: 400 12px/1 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; padding-right: 6px; }
+
+.rdm-query-code {
+  flex: 1 1 auto;
+  min-height: 72px;
+  margin: 0;
+  padding: 12px 14px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--border);
+  border-radius: var(--r-control);
+  background: var(--well);
+  font: 400 12px/1.6 var(--font-mono);
+  color: var(--fg-1);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.rdm-query-code:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+
+.rdm-query-textarea {
+  box-sizing: border-box;
+  width: 100%;
+  border-color: var(--border-control);
+  resize: none;
+}
+
+.rdm-query-textarea:focus { outline: 2px solid var(--focus); outline-offset: 1px; }
+
+.rdm-query-error {
+  flex: none;
+  padding: 10px 12px;
+  border: 1px solid var(--red);
+  border-radius: var(--r-control);
+  background: var(--red-surface);
+  font: 400 13px/1.45 var(--font-sans);
+  color: var(--fg-1);
+}
+
+.rdm-generating-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 400 13px/1.4 var(--font-sans);
+  color: var(--amber-text);
+}
+
+.rdm-spin-icon { animation: spin 0.8s linear infinite; }
+
+.rdm-query-actions { flex: none; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.rdm-manage-rule-link { margin-left: auto; }
+.rdm-query-validation { flex: none; font: 400 13px/1.4 var(--font-sans); }
+
+/* ── Footer ── */
+.rdm-foot {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 56px;
+  padding: 8px 20px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.rdm-key-hints { display: inline-flex; align-items: center; gap: 6px; font: 400 12px/1 var(--font-sans); color: var(--fg-3); }
+.rdm-key-hints .ds-kbd:not(:first-child) { margin-left: 8px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rdm-spin-icon { animation: none; }
+  .rdm-overlay.ds-scrim { animation: none; }
+}
+
+/* Mid widths: the same two columns, a little tighter. */
+@media (max-width: 1240px) {
+  .rdm-body { gap: 12px; padding: 12px 16px 14px; }
+  .rdm-head { padding: 10px 16px 12px; }
+  .rdm-foot { padding: 8px 16px; min-height: 52px; }
+  .rdm-title { font-size: 22px; }
+  .rdm-meta { gap: 6px 20px; }
+  .rdm-box__body { padding: 10px 12px 12px; gap: 10px; }
+  .rdm-fields { gap: 10px 12px; }
+  .rdm-field-value { font-size: 12px; }
+  .rdm-desc { max-height: calc(1.5em * 2); font-size: 13px; line-height: 1.5; }
+  .rdm-pair { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); }
+}
+
+/* Short or narrow screens: the columns stack and the body scrolls; each box
+   keeps a fixed height and still scrolls inside. */
+@media (max-width: 980px), (max-height: 640px) {
+  .rdm-body { display: block; overflow-y: auto; overscroll-behavior: contain; }
+  .rdm-col + .rdm-col { margin-top: 20px; }
+  .rdm-pair { flex: none; height: 340px; }
+  .rdm-box--grow, .rdm-slot--query { flex: none; height: 300px; }
+  .rdm-box--short { flex: none; height: 200px; }
+  .rdm-pair > .rdm-box { height: auto; }
+}
+
+@media (max-width: 760px) {
+  .rdm-overlay.ds-scrim { padding: 8px; }
+  .rdm-fields--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rdm-pair { grid-template-columns: minmax(0, 1fr); height: auto; }
+  .rdm-pair > .rdm-box { height: 300px; }
+  .rdm-key-hints { display: none; }
+}

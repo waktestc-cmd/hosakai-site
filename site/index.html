@@ -1,0 +1,212 @@
+<!doctype html>
+<!--
+  HOSAKAI starter page. Copy this file and change ONLY the content inside
+  <div class="shell-page"> (and the tab labels). Do not restyle anything:
+  every class here is defined in ../css. See SKILL.md for the rules.
+
+  Load order matters: base -> tokens -> components -> shell -> ice-kit -> patterns.
+-->
+<html lang="en" class="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Assessments · HOSAKAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/tokens.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/shell.css" />
+  <link rel="stylesheet" href="../css/ice-kit.css" />
+  <link rel="stylesheet" href="../css/patterns.css" />
+</head>
+<body>
+<div class="shell">
+
+  <!-- ── Header (56px): brand, search, profile. Same on every page. ── -->
+  <header class="shell-header">
+    <a href="#" class="shell-brand" aria-label="HOSAKAI, go to dashboard">
+      <img class="brand-light" src="../brand/hosakai-monogram-black.png" alt="" width="24" height="24" />
+      <img class="brand-dark" src="../brand/hosakai-monogram-white.png" alt="" width="24" height="24" />
+      <span class="shell-brand__word">HOSAKAI</span>
+    </a>
+    <button type="button" class="shell-search" aria-label="Search pages and actions (Ctrl K)">
+      <i data-lucide="search" width="15" height="15" stroke-width="1.75"></i>
+      <span class="shell-search__text">Search pages and actions</span>
+      <kbd class="ds-kbd">Ctrl K</kbd>
+    </button>
+    <div class="shell-header__spacer"></div>
+    <div class="profile-menu">
+      <button type="button" class="profile-trigger" aria-haspopup="menu" aria-expanded="false" aria-label="Account menu for ana" id="profile-trigger">
+        <span class="profile-avatar">AN</span>
+        <i data-lucide="chevron-down" width="12" height="12" stroke-width="2" class="profile-trigger__caret"></i>
+      </button>
+      <div class="profile-menu__panel" role="menu" id="profile-panel" hidden>
+        <div class="profile-menu__header">
+          <p class="profile-menu__name">ana</p>
+          <p class="profile-menu__sub">ana@corp.local</p>
+        </div>
+        <button type="button" class="nx-menu-item" role="menuitem" id="theme-item">
+          <span class="nx-menu-item__icon"><i data-lucide="moon" width="14" height="14" stroke-width="1.75"></i></span>
+          <span id="theme-label">Dark theme</span>
+        </button>
+        <button type="button" class="nx-menu-item" role="menuitem">
+          <span class="nx-menu-item__icon"><i data-lucide="settings" width="14" height="14" stroke-width="1.75"></i></span>
+          <span>Account settings</span>
+        </button>
+        <div class="nx-divider"></div>
+        <button type="button" class="nx-menu-item" role="menuitem">
+          <span class="nx-menu-item__icon"><i data-lucide="log-out" width="14" height="14" stroke-width="1.75"></i></span>
+          <span>Sign out</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="shell-body">
+    <!-- ── Icon rail (56px). Top group = work, bottom group = you. Ice between. ── -->
+    <nav class="shell-rail" aria-label="Main">
+      <div class="shell-rail__group">
+        <a href="#" class="shell-rail__item" aria-label="DIXIE"><i data-lucide="sparkles" width="18" height="18" stroke-width="1.75"></i><span class="shell-rail__tip" role="tooltip">DIXIE</span></a>
+        <a href="#" class="shell-rail__item" aria-label="Dashboard"><i data-lucide="layout-dashboard" width="18" height="18" stroke-width="1.75"></i><span class="shell-rail__tip" role="tooltip">Dashboard</span></a>
+        <a href="#" class="shell-rail__item" aria-label="Intel"><i data-lucide="radar" width="18" height="18" stroke-width="1.75"></i><span class="shell-rail__tip" role="tooltip">Intel</span></a>
+        <a href="#" class="shell-rail__item is-active" aria-label="Assessments" aria-current="page"><i data-lucide="crosshair" width="18" height="18" stroke-width="1.75"></i><span class="shell-rail__tip" role="tooltip">Assessments</span></a>
+        <a href="#" class="shell-rail__item" aria-label="Rules"><i data-lucide="shield-check" width="18" height="18" stroke-width="1.75"></i><span class="shell-rail__tip" role="tooltip">Rules</span></a>
+      </div>
+      <div class="shell-rail__ice"><canvas aria-hidden="true" class="ice-patch" data-ice="rise" data-ice-amount="0.8"></canvas></div>
+      <div class="shell-rail__group">
+        <a href="#" class="shell-rail__item" aria-label="Account"><i data-lucide="user" width="18" height="18" stroke-width="1.75"></i><span class="shell-rail__tip" role="tooltip">Account</span></a>
+        <a href="#" class="shell-rail__item" aria-label="Admin"><i data-lucide="lock" width="18" height="18" stroke-width="1.75"></i><span class="shell-rail__tip" role="tooltip">Admin</span></a>
+      </div>
+    </nav>
+
+    <main class="shell-main">
+      <!-- ── Section tabs (44px). Only when the section has 2+ pages. ── -->
+      <nav class="shell-tabs" aria-label="Assessments pages">
+        <span class="ds-label shell-tabs__section">Assessments</span>
+        <ul class="shell-tabs__list">
+          <li><a href="#" class="shell-tabs__link is-active" aria-current="page">Assessments</a></li>
+          <li><a href="#" class="shell-tabs__link">Runs</a></li>
+          <li><a href="#" class="shell-tabs__link">Attack suites</a></li>
+          <li><a href="#" class="shell-tabs__link">TTPs</a></li>
+        </ul>
+        <div class="shell-tabs__ice" aria-hidden="true"><canvas aria-hidden="true" class="ice-patch" data-ice="drift" data-ice-amount="0.9"></canvas></div>
+      </nav>
+
+      <div class="shell-page">
+        <div class="page">
+
+          <!-- 1. Page head: eyebrow, title, one-line lede, actions. Ice drifts in from the right. -->
+          <header class="ice-head">
+            <canvas aria-hidden="true" class="ice-patch ice-head__ice" data-ice="drift" data-ice-amount="0.9"></canvas>
+            <div class="ice-head__text">
+              <p class="ds-label ice-head__eyebrow">Assessments</p>
+              <h1 class="ice-head__title">Assessments</h1>
+              <p class="ice-head__lede">Validate your defences against an attack suite, then review every run and report in one place.</p>
+            </div>
+            <div class="ice-head__actions">
+              <button type="button" class="ds-btn ds-btn--primary"><i data-lucide="plus" width="14" height="14"></i>New assessment</button>
+            </div>
+          </header>
+
+          <!-- 2. Toolbar: section title + count, spacer, search. -->
+          <div class="hk-toolbar">
+            <h2 class="hk-toolbar__title">All assessments<span class="hk-toolbar__count" data-scramble="3">3</span></h2>
+            <span class="hk-toolbar__spacer"></span>
+            <label class="hk-search">
+              <i data-lucide="search" width="15" height="15"></i>
+              <span class="ds-sr-only">Search assessments</span>
+              <input class="ds-input" type="search" placeholder="Search assessments…" />
+            </label>
+          </div>
+
+          <!-- 3. Filter tabs. -->
+          <div class="ds-tabs hk-tabs" role="tablist" aria-label="Filter by status">
+            <button type="button" class="ds-tab" role="tab" aria-selected="true">All</button>
+            <button type="button" class="ds-tab" role="tab" aria-selected="false">Not executed</button>
+            <button type="button" class="ds-tab" role="tab" aria-selected="false">Running</button>
+            <button type="button" class="ds-tab" role="tab" aria-selected="false">Failed</button>
+            <button type="button" class="ds-tab" role="tab" aria-selected="false">Executed</button>
+          </div>
+
+          <!-- 4. The table, in a panel. Status = ice mark + the app's own word. -->
+          <section class="hk-panel">
+            <div class="hk-table-scroll">
+              <table class="hk-table">
+                <thead><tr><th>Assessment</th><th>Attack suite</th><th>Status</th><th>Detection share</th><th style="width:96px">Runs</th></tr></thead>
+                <tbody>
+                  <tr class="is-clickable" tabindex="0">
+                    <td><span class="hk-cell-title">Q3 AD Resilience</span><span class="hk-cell-sub">Bundle_1780348743982</span></td>
+                    <td>15 techniques</td>
+                    <td><span class="hk-status is-ok">Executed</span></td>
+                    <td><span data-ice-meter="67" data-cells="16" data-tone="ok"></span> <span class="hk-num">67%</span></td>
+                    <td class="hk-num">5</td>
+                  </tr>
+                  <tr class="is-clickable" tabindex="0">
+                    <td><span class="hk-cell-title">DC Lateral Sweep</span><span class="hk-cell-sub">Bundle_1780348689534</span></td>
+                    <td>8 techniques</td>
+                    <td><span class="hk-status is-run is-pulse">Running</span></td>
+                    <td><span data-ice-meter="40" data-cells="16" data-tone="run"></span> <span class="hk-num">40%</span></td>
+                    <td class="hk-num">5</td>
+                  </tr>
+                  <tr class="is-clickable" tabindex="0">
+                    <td><span class="hk-cell-title">Credential Exposure</span><span class="hk-cell-sub">Bundle_1780383940420</span></td>
+                    <td>3 techniques</td>
+                    <td><span class="hk-status is-bad">Failed</span></td>
+                    <td><span data-ice-meter="0" data-cells="16"></span> <span class="hk-num">0%</span></td>
+                    <td class="hk-num">2</td>
+                  </tr>
+                  <tr class="is-clickable" tabindex="0">
+                    <td><span class="hk-cell-title">Golden Ticket Drill</span><span class="hk-cell-sub">Bundle_1780399911002</span></td>
+                    <td>4 techniques</td>
+                    <td><span class="hk-status is-idle">Not executed</span></td>
+                    <td><span class="hk-status is-idle">Not run</span></td>
+                    <td class="hk-num">0</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- 5. An empty state: ice behind, a typed command, one sentence, one action. -->
+          <div class="ice-state" style="margin-top:24px">
+            <canvas aria-hidden="true" class="ice-patch" data-ice="even" data-ice-amount="0.6"></canvas>
+            <div class="ice-state__body">
+              <p data-prompt="hosakai runs --list"></p>
+              <p class="ice-state__title">No runs yet</p>
+              <div class="ice-state__more">Run this assessment to see which attacks your tools detect.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<style>
+  /* Starter-only glue: which monogram shows per theme, and the page width.
+     In the React app Layout.tsx does both. */
+  html.light .brand-dark, html.dark .brand-light { display: none; }
+  .profile-menu__panel[hidden] { display: none; }
+</style>
+<script src="../js/icons.js"></script>
+<script src="../js/hosakai-ice.js"></script>
+<script>
+  // Profile menu: open/close, Esc, outside click, and the theme switch inside it.
+  (function () {
+    var trigger = document.getElementById("profile-trigger"), panel = document.getElementById("profile-panel");
+    function setOpen(open) { panel.hidden = !open; trigger.setAttribute("aria-expanded", String(open)); trigger.classList.toggle("is-open", open); }
+    trigger.addEventListener("click", function () { setOpen(panel.hidden); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") setOpen(false); });
+    document.addEventListener("mousedown", function (e) { if (!e.target.closest(".profile-menu")) setOpen(false); });
+    function label() { document.getElementById("theme-label").textContent = document.documentElement.classList.contains("dark") ? "Light theme" : "Dark theme"; }
+    document.getElementById("theme-item").addEventListener("click", function () {
+      HosakaiIce.setTheme(document.documentElement.classList.contains("dark") ? "light" : "dark"); label(); setOpen(false);
+    });
+    label();
+  })();
+</script>
+</body>
+</html>

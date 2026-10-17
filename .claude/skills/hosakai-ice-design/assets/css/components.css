@@ -1,0 +1,372 @@
+/* HOSAKAI components (docs/redesign/DESIGN_SYSTEM.md). Pages compose these;
+   they don't restyle them. */
+
+body {
+  background: var(--bg);
+  color: var(--fg-1);
+  font: 400 14px/1.55 var(--font-sans);
+}
+
+::selection {
+  background: var(--fg-1);
+  color: var(--bg);
+}
+
+/* Scrollbars stay visible so long pages show that they scroll. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-control) transparent;
+}
+
+/* ── Type ── */
+.ds-label {
+  font: 400 12px/1.4 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+.ds-id {
+  font: 400 12px/1.4 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--fg-3);
+}
+
+.ds-kbd {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 6px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-chip);
+  font: 400 12px/1 var(--font-mono);
+  color: var(--fg-3);
+  white-space: nowrap;
+}
+
+/* ── Buttons ── */
+.ds-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid transparent;
+  border-radius: var(--r-control);
+  font: 500 12px/1 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--motion-fast) ease, border-color var(--motion-fast) ease,
+              color var(--motion-fast) ease;
+}
+
+.ds-btn--primary {
+  background: var(--fg-1);
+  color: var(--bg);
+}
+
+.ds-btn--primary:hover:not(:disabled) {
+  background: var(--fg-2);
+}
+
+.ds-btn--secondary {
+  border-color: var(--border-control);
+  background: transparent;
+  color: var(--fg-1);
+}
+
+.ds-btn--secondary:hover:not(:disabled) {
+  background: var(--surface-2);
+}
+
+.ds-btn--danger {
+  border-color: var(--red);
+  background: var(--red-surface);
+  color: var(--fg-1);
+}
+
+.ds-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Panel ── */
+.ds-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-panel);
+  padding: 20px;
+}
+
+/* ── Status pills: word + icon, colour last ── */
+.ds-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  padding: 0 8px;
+  border: 1px solid var(--border-control);
+  border-radius: var(--r-chip);
+  font: 400 12px/1 var(--font-sans);
+  color: var(--fg-1);
+  white-space: nowrap;
+}
+
+.ds-status--partly,
+.ds-status--waiting,
+.ds-status--failed {
+  border-style: dashed;
+}
+
+.ds-status--waiting,
+.ds-status--failed {
+  color: var(--fg-2);
+}
+
+.ds-status--missed {
+  border-color: var(--red);
+  background: var(--red-surface);
+}
+
+.ds-status--missed svg {
+  color: var(--red);
+}
+
+.ds-status--none {
+  border-color: transparent;
+  color: var(--fg-3);
+}
+
+/* ── Tabs ── */
+.ds-tabs {
+  display: flex;
+  gap: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.ds-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  margin-bottom: -1px;
+  padding: 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  font: 500 14px/1 var(--font-sans);
+  color: var(--fg-3);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ds-tab:hover {
+  color: var(--fg-1);
+}
+
+.ds-tab[aria-selected="true"],
+.ds-tab.is-active {
+  border-bottom-color: var(--fg-1);
+  color: var(--fg-1);
+}
+
+.ds-tab__count {
+  font: 400 12px/1 var(--font-mono);
+  color: var(--fg-3);
+}
+
+/* ── Input ── */
+.ds-input {
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--border-control);
+  border-radius: var(--r-control);
+  background: var(--surface);
+  font: 400 14px/1 var(--font-sans);
+  color: var(--fg-1);
+}
+
+.ds-input::placeholder {
+  color: var(--fg-3);
+}
+
+/* ── Popup ── covers the whole app, rail and header included. */
+.ds-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-popup);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 12vh 16px 16px;
+  background: var(--scrim);
+}
+
+.ds-popup {
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-panel);
+  box-shadow: var(--shadow-popup);
+}
+
+/* ── Motion: decorative, once, off under reduced motion ── */
+@keyframes ds-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Read by screen readers, not shown. */
+.ds-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Toasts ──
+   Bottom-left, clear of the rail, above everything but never over the header.
+   A neutral card; the status is a small square mark on the left. Plain
+   messages get a mono "#" in that place, the same mark the ice uses. */
+[data-sonner-toaster].ds-toaster {
+  z-index: var(--z-toast) !important;
+}
+
+[data-sonner-toaster].ds-toaster[data-x-position="left"] {
+  left: calc(var(--rail-w) + 16px) !important;
+}
+
+.ds-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: var(--width);
+  padding: 12px 40px 12px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-panel);
+  background: var(--surface);
+  color: var(--fg-1);
+  box-shadow: var(--shadow-popup);
+  font: 400 14px/1.4 var(--font-sans);
+}
+
+:root.dark .ds-toast {
+  border-color: var(--border-control);
+  background: var(--surface-3);
+}
+
+/* The mark: a 22px square with the icon, tinted by status. */
+.ds-toast__icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  border: 1px solid var(--border-control);
+  border-radius: var(--r-control);
+  color: var(--fg-1);
+}
+
+.ds-toast:not(:has(.ds-toast__icon))::before {
+  content: "#";
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--border-control);
+  border-radius: var(--r-control);
+  font: 500 12px/1 var(--font-mono);
+  color: var(--fg-2);
+}
+
+.ds-toast.is-success .ds-toast__icon { color: var(--green-text); background: var(--green-surface); border-color: transparent; }
+.ds-toast.is-warning .ds-toast__icon { color: var(--amber-text); background: var(--amber-surface); border-color: transparent; }
+.ds-toast.is-error .ds-toast__icon { color: var(--red-text); background: var(--red-surface); border-color: transparent; }
+.ds-toast.is-info .ds-toast__icon { color: var(--fg-1); }
+
+.ds-toast__content {
+  display: grid;
+  flex: 1;
+  gap: 2px;
+  min-width: 0;
+  padding-top: 1px;
+}
+
+.ds-toast__title {
+  font-weight: 500;
+  color: var(--fg-1);
+  overflow-wrap: anywhere;
+}
+
+.ds-toast__desc {
+  font-size: 13px;
+  color: var(--fg-2);
+  overflow-wrap: anywhere;
+}
+
+.ds-toast__action {
+  flex: none;
+  align-self: center;
+  height: 28px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+[data-sonner-toast] [data-close-button].ds-toast__close {
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  left: auto !important;
+  transform: none !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-control);
+  background: none;
+  color: var(--fg-3);
+  cursor: pointer;
+}
+
+[data-sonner-toast] [data-close-button].ds-toast__close:hover {
+  background: var(--surface-2);
+  color: var(--fg-1);
+}
+
+.ds-toast__close:focus-visible {
+  outline: 2px solid var(--fg-1);
+  outline-offset: 1px;
+}
+
+.ds-toast__close svg {
+  width: 14px;
+  height: 14px;
+}
+
+.ds-toast__spin {
+  animation: spin 1s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-toast__spin { animation: none; }
+  [data-sonner-toast] { transition: none !important; }
+}
