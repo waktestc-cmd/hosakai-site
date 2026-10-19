@@ -32,7 +32,7 @@ jobs:
       - name: Test the waitlist service
         run: node --test services/waitlist/worker.test.mjs
       - name: Check the design rules
-        run: python3 .claude/skills/hosakai-ice-design/scripts/check_design.py site
+        run: python3 .claude/skills/breachmatrix-ice-design/scripts/check_design.py site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

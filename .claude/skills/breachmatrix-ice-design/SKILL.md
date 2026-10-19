@@ -1,11 +1,11 @@
 ---
-name: hosakai-ice-design
-description: The HOSAKAI "ice" design system as a deterministic rulebook - exact tokens, Geist type scale, the # ice texture and its engine, the # + × . status glyphs, ice meters, motion, shell, page recipes, copy rules, ready-made CSS/JS/React files and a checker script. Use this skill for ANY UI work on HOSAKAI or anything that should look like it - building or restyling a page, screen, component, popup, table, dashboard, empty state, toast, sign-in or report; reviewing UI for design consistency; or when someone mentions the ice concept, the # texture, Netflix red, black/white security UI, memorable.sh style, or "make it look like HOSAKAI". Use it even for small UI tweaks, because the rules are exact and easy to get wrong from memory.
+name: breachmatrix-ice-design
+description: The BREACHMATRIX "ice" design system as a deterministic rulebook - exact tokens, Geist type scale, the # ice texture and its engine, the # + × . status glyphs, ice meters, motion, shell, page recipes, copy rules, ready-made CSS/JS/React files and a checker script. Use this skill for ANY UI work on BREACHMATRIX or anything that should look like it - building or restyling a page, screen, component, popup, table, dashboard, empty state, toast, sign-in or report; reviewing UI for design consistency; or when someone mentions the ice concept, the # texture, Netflix red, black/white security UI, memorable.sh style, or "make it look like BREACHMATRIX". Use it even for small UI tweaks, because the rules are exact and easy to get wrong from memory.
 ---
 
-# HOSAKAI ice design: the rulebook
+# BREACHMATRIX ice design: the rulebook
 
-This skill reproduces the approved HOSAKAI design exactly. It is written so that a
+This skill reproduces the approved BREACHMATRIX design exactly. It is written so that a
 beginner designer or any model gets the same result every time. **Do not design. Look
 things up and copy.** Every value you need is in a file here; if you find yourself
 choosing a colour, a size, a radius, a duration or a word from taste, stop and look it up.
@@ -16,7 +16,7 @@ by intuition is the most common failure. Copying never drifts.
 
 ## The concept in 30 seconds
 
-- **Your defences are the ice.** HOSAKAI runs safe test attacks through it and shows where it held and where it broke.
+- **Your defences are the ice.** BREACHMATRIX runs safe test attacks through it and shows where it held and where it broke.
 - The ice is drawn with the characters `. : + * #` (thin → solid). They appear as **texture** (a moving field of glyphs in empty space) and as **language** (one glyph beside every status).
 - Palette: black, white, a grey ramp, and **Netflix red `#E50914`, which means "missed / broken"**. Green and amber mark operational states on working pages.
 - Type: **Geist** for reading, **Geist Mono** for labels, IDs, numbers and anything a machine produced.
@@ -52,13 +52,13 @@ by intuition is the most common failure. Copying never drifts.
 | `assets/css/ice-kit.css` | ice patch, prompt, empty state, page head, marks, meters, band | always |
 | `assets/css/patterns.css` | `hk-*`: status, table, toolbar, search, pager, popup parts, fields, notes, toasts | list / detail / admin pages |
 | `assets/css/result-sheet.css` | the result sheet | result detail views |
-| `assets/js/hosakai-ice.js` | the ice engine + scramble, prompt, meter, theme, popup, toast (plain JS) | plain HTML |
+| `assets/js/breachmatrix-ice.js` | the ice engine + scramble, prompt, meter, theme, popup, toast (plain JS) | plain HTML |
 | `assets/js/icons.js` | Lucide 0.462 icons, offline | plain HTML |
 | `assets/react/*` | the approved React sources (engine, kit, popup, shell, dial, timeline, result sheet, toaster, words); see its README | React apps; copy files |
 | `assets/templates/starter.html` | a complete list page | start every plain page here |
 | `assets/templates/result-sheet.html` | the result sheet in plain HTML | result detail views |
 | `assets/golden/*.png` | approved screenshots, both themes | compare your result |
-| `assets/brand/*` | HOSAKAI monogram, black and white | the header, sign-in |
+| `assets/brand/*` | BREACHMATRIX monogram, black and white | the header, sign-in |
 | `references/tokens.md` | what each token is for + a decision table | choosing any colour |
 | `references/typography-layout.md` | type scale, spacing, shell, hierarchy, breakpoints | any layout or text |
 | `references/ice.md` | the concept, glyph language, placements, engine numbers, motion | anything with ice, status or motion |
@@ -75,9 +75,9 @@ by intuition is the most common failure. Copying never drifts.
 2. **Start from a copy, not a blank file.**
    - Plain HTML: copy `assets/templates/starter.html` and the `assets/` folders next to it, keeping the relative paths.
    - React: copy `assets/css/*` into your styles (import order: tokens → components → shell → ice-kit → patterns), copy `assets/react/engine.ts` + `Ice.tsx` + `Layout.tsx`, and use their components (`IceField`, `PageHead`, `IceState`, `Prompt`, `Scramble`, `IceMark`, `IceMeter`, `IceBand`).
-   - Other frameworks: load the CSS files and `assets/js/hosakai-ice.js`; the kit runs from `data-*` attributes, so any template language works.
+   - Other frameworks: load the CSS files and `assets/js/breachmatrix-ice.js`; the kit runs from `data-*` attributes, so any template language works.
 3. **Fill the slots in the recipe's order** using the markup in `references/components.md`. Write every word with `references/copy.md`.
-4. **Look up every status** in `references/status-lookup.md` (plain JS: `data-status-area="rules"` on the span, or `HosakaiIce.statusTone(area, word)`). **Add the ice only where `references/ice.md` §3 says.** Status = glyph + word (§1). Proportions = ice meter + number (§2).
+4. **Look up every status** in `references/status-lookup.md` (plain JS: `data-status-area="rules"` on the span, or `BreachmatrixIce.statusTone(area, word)`). **Add the ice only where `references/ice.md` §3 says.** Status = glyph + word (§1). Proportions = ice meter + number (§2).
 5. **Run the checker** and fix every error:
    ```bash
    python3 <skill>/scripts/check_design.py <your files or folder>

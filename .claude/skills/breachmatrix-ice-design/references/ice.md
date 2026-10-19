@@ -2,7 +2,7 @@
 
 ## The idea in one paragraph
 
-Your defences are **the ice**. HOSAKAI runs safe test attacks through it and shows
+Your defences are **the ice**. BREACHMATRIX runs safe test attacks through it and shows
 where it **held** and where it **broke**. The ice is drawn with the characters
 `. : + * #` (thin to solid). Because the characters already mean "how solid", they
 are used two ways: as **texture** (a field of glyphs drawn on a canvas) and as
@@ -86,7 +86,7 @@ Ice canvases are always `aria-hidden="true"` and `pointer-events: none`.
 
 ## 4. The engine: fixed numbers (do not change)
 
-The engine is `assets/js/hosakai-ice.js` (plain JS) or `assets/react/engine.ts` (React).
+The engine is `assets/js/breachmatrix-ice.js` (plain JS) or `assets/react/engine.ts` (React).
 Both use exactly these values.
 
 | Constant | Value | What it does |

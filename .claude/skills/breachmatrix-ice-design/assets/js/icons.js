@@ -1,6 +1,6 @@
-/* HOSAKAI icons: Lucide v0.462.0 (ISC licence), the version the app uses.
+/* BREACHMATRIX icons: Lucide v0.462.0 (ISC licence), the version the app uses.
  * Write <i data-lucide="search" width="15" height="15" stroke-width="1.75"></i>
- * and call HosakaiIcons.render() (it runs itself on load). No network needed.
+ * and call BreachmatrixIcons.render() (it runs itself on load). No network needed.
  * Sizes used in the app: rail 18, header and inline 14-16, small marks 12-14.
  * Stroke width 1.75 everywhere except the profile chevron (2). */
 (function(){
@@ -8,13 +8,13 @@
   function render(root){
     (root||document).querySelectorAll('i[data-lucide]').forEach(function(i){
       var n=i.getAttribute('data-lucide'), body=ICONS[n];
-      if(!body){ console.warn('HosakaiIcons: no icon named', n); return; }
+      if(!body){ console.warn('BreachmatrixIcons: no icon named', n); return; }
       var w=i.getAttribute('width')||'16', h=i.getAttribute('height')||w, sw=i.getAttribute('stroke-width')||'1.75';
       var cls='lucide lucide-'+n+(i.getAttribute('class')?' '+i.getAttribute('class'):'');
       var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="'+sw+'" stroke-linecap="round" stroke-linejoin="round" class="'+cls+'" aria-hidden="true">'+body+'</svg>';
       i.insertAdjacentHTML('afterend', svg); i.remove();
     });
   }
-  window.HosakaiIcons={ICONS:ICONS, render:render, names:Object.keys(ICONS)};
+  window.BreachmatrixIcons={ICONS:ICONS, render:render, names:Object.keys(ICONS)};
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){render();}); else render();
 })();

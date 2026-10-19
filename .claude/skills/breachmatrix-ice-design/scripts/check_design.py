@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""HOSAKAI design checker: turns the rulebook into errors you cannot miss.
+"""BREACHMATRIX design checker: turns the rulebook into errors you cannot miss.
 
 Usage:
   python3 check_design.py <file-or-folder> [...]       # check CSS, HTML, JSX/TSX
@@ -96,7 +96,7 @@ def check_file(path):
                 looks_colour = re.search(COLOR_PROPS + r"\s*:[^;]*var\(--" + re.escape(t) + r"\)", code)
                 legacy = t.startswith(("hk-", "fg1", "fg2", "fg3", "fg4", "critical", "secured", "high", "medium", "low", "signal"))
                 if looks_colour and (legacy or (t not in TOKENS and not t.startswith(("r-", "font-", "motion-", "z-", "shadow-", "rail", "header", "width", "rdm-", "ice-")))):
-                    add("error", "C2", i, f"'--{t}' is not a HOSAKAI colour token; pick one from references/tokens.md")
+                    add("error", "C2", i, f"'--{t}' is not a BREACHMATRIX colour token; pick one from references/tokens.md")
         if re.search(r"(?<!repeating-)(linear|radial|conic)-gradient\(", low):
             add("error", "C4", i, "no gradients: flat colour only (repeating-linear-gradient hatching for 'no answer yet' bars is the one exception)")
 

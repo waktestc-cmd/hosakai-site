@@ -11,7 +11,7 @@
   <meta property="og:site_name" content="Breachmatrix" />
   <meta property="og:title" content="Breachmatrix | AI-Native Security Automation &amp; Testing" />
   <meta property="og:description" content="AI-first offensive and defensive security automation and testing within client-controlled platforms. Built to help teams find gaps and strengthen their defences." />
-  <meta property="og:image" content="https://breachmatrix.com/brand/hosakai-monogram-black.png" />
+  <meta property="og:image" content="https://breachmatrix.com/brand/breachmatrix-monogram-black.png" />
   <meta property="og:image:alt" content="Breachmatrix monogram" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Breachmatrix | AI-Native Security Automation &amp; Testing" />
@@ -55,8 +55,8 @@
       ]
     }
   </script>
-  <link rel="icon" type="image/png" href="brand/hosakai-monogram-black.png" media="(prefers-color-scheme: light)" />
-  <link rel="icon" type="image/png" href="brand/hosakai-monogram-white.png" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/png" href="brand/breachmatrix-monogram-black.png" media="(prefers-color-scheme: light)" />
+  <link rel="icon" type="image/png" href="brand/breachmatrix-monogram-white.png" media="(prefers-color-scheme: dark)" />
   <script>
     /* Set the saved theme before first paint, so dark visitors see no flash. */
     try { if (localStorage.getItem("theme-preference") === "dark") document.documentElement.className = "dark"; } catch (e) { /* storage may be blocked */ }
@@ -64,12 +64,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/tokens.css" />
-  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/base.css?v=breachmatrix-1" />
+  <link rel="stylesheet" href="css/tokens.css?v=breachmatrix-1" />
+  <link rel="stylesheet" href="css/components.css?v=breachmatrix-1" />
   <link rel="stylesheet" href="css/shell.css" />
   <link rel="stylesheet" href="css/ice-kit.css" />
-  <link rel="stylesheet" href="css/patterns.css" />
+  <link rel="stylesheet" href="css/patterns.css?v=breachmatrix-1" />
   <link rel="stylesheet" href="css/site.css?v=ice-close-1" />
 </head>
 <body id="top">
@@ -77,8 +77,8 @@
 
 <header class="shell-header site-bar">
   <a href="#top" class="shell-brand" aria-label="Breachmatrix, back to top">
-    <img class="site-light" src="brand/hosakai-monogram-black.png" alt="" width="24" height="24" />
-    <img class="site-dark" src="brand/hosakai-monogram-white.png" alt="" width="24" height="24" />
+    <img class="site-light" src="brand/breachmatrix-monogram-black.png" alt="" width="24" height="24" />
+    <img class="site-dark" src="brand/breachmatrix-monogram-white.png" alt="" width="24" height="24" />
     <span class="shell-brand__word">BREACHMATRIX</span>
   </a>
   <nav class="site-nav" aria-label="Main">
@@ -241,7 +241,7 @@
   <div class="site-foot__inner">
     <div class="site-foot__brand">
       <p class="site-foot__mark">
-        <img src="brand/hosakai-monogram-white.png" alt="" width="24" height="24" />
+        <img src="brand/breachmatrix-monogram-white.png" alt="" width="24" height="24" />
         <span class="shell-brand__word">BREACHMATRIX</span>
       </p>
       <p class="site-lede">AI-native security automation.<br />Offensive thinking. Defensive confidence.</p>
@@ -262,16 +262,16 @@
   </div>
 </footer>
 
-<script src="js/icons.js"></script>
-<script src="js/hosakai-ice.js?v=prelaunch-1"></script>
+<script src="js/icons.js?v=breachmatrix-1"></script>
+<script src="js/breachmatrix-ice.js?v=prelaunch-1"></script>
 <script src="js/site.js?v=waitlist-1"></script>
 <script>
-  // The theme switch: one button in the bar, remembered by HosakaiIce.setTheme.
+  // The theme switch: one button in the bar, remembered by BreachmatrixIce.setTheme.
   (function () {
     var root = document.documentElement, btn = document.getElementById("theme-toggle");
     function label() { btn.setAttribute("aria-label", root.classList.contains("dark") ? "Switch to light theme" : "Switch to dark theme"); }
     btn.addEventListener("click", function () {
-      HosakaiIce.setTheme(root.classList.contains("dark") ? "light" : "dark"); label();
+      BreachmatrixIce.setTheme(root.classList.contains("dark") ? "light" : "dark"); label();
     });
     label();
   })();

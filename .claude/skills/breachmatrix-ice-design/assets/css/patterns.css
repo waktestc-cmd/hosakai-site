@@ -1,4 +1,4 @@
-/* HOSAKAI shared page patterns: status words with ice marks, panels, tables,
+/* BREACHMATRIX shared page patterns: status words with ice marks, panels, tables,
    toolbars, tabs, icon buttons, links, pager, popups and form fields.
    An exact copy of the approved Assessments kit (asm-kit.css), renamed asm- to hk-.
    Do not change values here; compose them. */
@@ -428,7 +428,7 @@
   white-space: nowrap;
 }
 
-/* ── Toasts without a library (HosakaiIce.toast). Same card as the React
+/* ── Toasts without a library (BreachmatrixIce.toast). Same card as the React
    toaster (components.css .ds-toast); this only adds the stack. ── */
 .hk-toasts {
   position: fixed;

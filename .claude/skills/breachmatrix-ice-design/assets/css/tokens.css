@@ -1,4 +1,4 @@
-/* HOSAKAI tokens. The one place colours, type, shape, motion and layers are
+/* BREACHMATRIX tokens. The one place colours, type, shape, motion and layers are
    set. Values and their contrast checks: docs/redesign/DESIGN_SYSTEM.md.
 
    The second half maps the older names (--hk-*, --fg1, --critical, the
@@ -7,7 +7,7 @@
 :root,
 html.light {
   /* Colour (light) */
-  /* Neutrals: the HOSAKAI grey ramp. */
+  /* Neutrals: the BREACHMATRIX grey ramp. */
   --bg: #FFFFFF;
   --bg-sunk: #F6F6F7;      /* the frame (rail, tab bar) and wells */
   --well: #F6F6F7;         /* code, output and query boxes inside panels */

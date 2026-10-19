@@ -8,7 +8,7 @@ Tone → glyph → class: `ok` = `#` green · `run` = `+` amber (add `is-pulse` 
 live) · `bad` = `×` red · `idle` = `.` grey. Markup: `<span class="hk-status is-<tone>">WORD</span>`;
 API words in caps use `hk-status hk-status--mono`.
 
-In plain JS: `HosakaiIce.statusTone("agents-connection", "OFFLINE")` → `"bad"`.
+In plain JS: `BreachmatrixIce.statusTone("agents-connection", "OFFLINE")` → `"bad"`.
 
 ## Working pages (green, amber, red, grey)
 

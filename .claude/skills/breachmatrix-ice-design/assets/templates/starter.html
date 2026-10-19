@@ -1,6 +1,6 @@
 <!doctype html>
 <!--
-  HOSAKAI starter page. Copy this file and change ONLY the content inside
+  BREACHMATRIX starter page. Copy this file and change ONLY the content inside
   <div class="shell-page"> (and the tab labels). Do not restyle anything:
   every class here is defined in ../css. See SKILL.md for the rules.
 
@@ -10,7 +10,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Assessments · HOSAKAI</title>
+  <title>Assessments · BREACHMATRIX</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -26,10 +26,10 @@
 
   <!-- ── Header (56px): brand, search, profile. Same on every page. ── -->
   <header class="shell-header">
-    <a href="#" class="shell-brand" aria-label="HOSAKAI, go to dashboard">
-      <img class="brand-light" src="../brand/hosakai-monogram-black.png" alt="" width="24" height="24" />
-      <img class="brand-dark" src="../brand/hosakai-monogram-white.png" alt="" width="24" height="24" />
-      <span class="shell-brand__word">HOSAKAI</span>
+    <a href="#" class="shell-brand" aria-label="BREACHMATRIX, go to dashboard">
+      <img class="brand-light" src="../brand/breachmatrix-monogram-black.png" alt="" width="24" height="24" />
+      <img class="brand-dark" src="../brand/breachmatrix-monogram-white.png" alt="" width="24" height="24" />
+      <span class="shell-brand__word">BREACHMATRIX</span>
     </a>
     <button type="button" class="shell-search" aria-label="Search pages and actions (Ctrl K)">
       <i data-lucide="search" width="15" height="15" stroke-width="1.75"></i>
@@ -173,7 +173,7 @@
           <div class="ice-state" style="margin-top:24px">
             <canvas aria-hidden="true" class="ice-patch" data-ice="even" data-ice-amount="0.6"></canvas>
             <div class="ice-state__body">
-              <p data-prompt="hosakai runs --list"></p>
+              <p data-prompt="breachmatrix runs --list"></p>
               <p class="ice-state__title">No runs yet</p>
               <div class="ice-state__more">Run this assessment to see which attacks your tools detect.</div>
             </div>
@@ -192,7 +192,7 @@
   .profile-menu__panel[hidden] { display: none; }
 </style>
 <script src="../js/icons.js"></script>
-<script src="../js/hosakai-ice.js"></script>
+<script src="../js/breachmatrix-ice.js"></script>
 <script>
   // Profile menu: open/close, Esc, outside click, and the theme switch inside it.
   (function () {
@@ -203,7 +203,7 @@
     document.addEventListener("mousedown", function (e) { if (!e.target.closest(".profile-menu")) setOpen(false); });
     function label() { document.getElementById("theme-label").textContent = document.documentElement.classList.contains("dark") ? "Light theme" : "Dark theme"; }
     document.getElementById("theme-item").addEventListener("click", function () {
-      HosakaiIce.setTheme(document.documentElement.classList.contains("dark") ? "light" : "dark"); label(); setOpen(false);
+      BreachmatrixIce.setTheme(document.documentElement.classList.contains("dark") ? "light" : "dark"); label(); setOpen(false);
     });
     label();
   })();

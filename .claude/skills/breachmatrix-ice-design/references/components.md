@@ -166,7 +166,7 @@ The toolbar is a sibling placed **before** the `.ds-panel` that holds the table,
 <div class="ice-state">                                <!-- add is-compact inside small boxes; is-error for errors -->
   <canvas aria-hidden="true" class="ice-patch" data-ice="even" data-ice-amount="0.6"></canvas>
   <div class="ice-state__body">
-    <p data-prompt="hosakai runs --list"></p>
+    <p data-prompt="breachmatrix runs --list"></p>
     <p class="ice-state__title">No runs yet</p>
     <div class="ice-state__more">Run this assessment to see which attacks your tools detect.
       <button type="button" class="ds-btn ds-btn--secondary ds-btn--sm">Run assessment</button></div>
@@ -176,10 +176,10 @@ The toolbar is a sibling placed **before** the `.ds-panel` that holds the table,
 
 | State | Prompt | Title | More |
 |---|---|---|---|
-| empty | `hosakai <thing> --list` | "No <things> yet" | how to get the first one, + one button |
-| filtered empty | `hosakai <thing> --filter <x>` | "Nothing matches" | "Clear the filter to see all <things>." |
-| loading | `hosakai <thing> --fetch` | "Loading <things>…" | — |
-| error (`is-error`) | `hosakai <thing>` | what failed, in plain words | what to do + "Try again"; the server's text only small, under "Details:" |
+| empty | `breachmatrix <thing> --list` | "No <things> yet" | how to get the first one, + one button |
+| filtered empty | `breachmatrix <thing> --filter <x>` | "Nothing matches" | "Clear the filter to see all <things>." |
+| loading | `breachmatrix <thing> --fetch` | "Loading <things>…" | — |
+| error (`is-error`) | `breachmatrix <thing>` | what failed, in plain words | what to do + "Try again"; the server's text only small, under "Details:" |
 
 Never show raw error text (`TypeError: …`, "is not iterable") as the message.
 
@@ -200,7 +200,7 @@ Never show raw error text (`TypeError: …`, "is not iterable") as the message.
     </footer>
   </div>
 </div>
-<script>HosakaiIce.openPopup(document.querySelector('[data-popup]'))</script>
+<script>BreachmatrixIce.openPopup(document.querySelector('[data-popup]'))</script>
 ```
 
 Behaviour (the helper does all of it; in React use `assets/react/` patterns):
@@ -233,7 +233,7 @@ green `✓` done, amber `!` warning, red `×` failed, mono `#` for plain message
 button top-right. Newest in front; the stack opens on hover.
 
 - React: `assets/react/sonner.tsx` (Sonner, `position="bottom-left"`, no `richColors`).
-- Plain HTML: `HosakaiIce.toast({ title, description, tone: "ok"|"warn"|"error"|"info" })`.
+- Plain HTML: `BreachmatrixIce.toast({ title, description, tone: "ok"|"warn"|"error"|"info" })`.
 
 Words: past tense for done ("Assessment created"), what happened + what to do for errors.
 

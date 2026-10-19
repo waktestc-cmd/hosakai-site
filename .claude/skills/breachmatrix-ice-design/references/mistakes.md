@@ -49,7 +49,7 @@ IDs in brackets are checked by `scripts/check_design.py`.
 |---|---|
 | A random `#` sprinkle as background wallpaper | ice only in the places listed in `ice.md` §3 |
 | Ice behind text, tables or inputs | ice sits in empty space (right of a head, foot of the rail…) |
-| Re-implementing the engine "roughly" | copy `hosakai-ice.js` / `engine.ts`; never change its numbers |
+| Re-implementing the engine "roughly" | copy `breachmatrix-ice.js` / `engine.ts`; never change its numbers |
 | Ice canvas without `aria-hidden` [A1] | decorative canvases are hidden from assistive tech |
 | Ice at 50–100% opacity | the engine caps plain ice at 0.35 |
 | Dots or emoji for status [W1] | `#` `+` `×` `.` glyphs |
@@ -82,7 +82,7 @@ IDs in brackets are checked by `scripts/check_design.py`.
 | Wrong | Right |
 |---|---|
 | Popup that doesn't cover the rail/header | `.ds-scrim` is fixed, `z-index: var(--z-popup)` |
-| Popup without Esc / focus trap / focus return | `HosakaiIce.openPopup` or `usePopupBehaviour` |
+| Popup without Esc / focus trap / focus return | `BreachmatrixIce.openPopup` or `usePopupBehaviour` |
 | Long output cut off inside a fixed box | the box keeps its size, the text scrolls inside it |
 | Terminal output wrapping and breaking columns | `white-space: pre`, sideways scroll in the box |
 | `<button>` without `type` [A2] | `type="button"` |

@@ -1,14 +1,14 @@
 # Breachmatrix website
 
-Public website for Breachmatrix, built on the HOSAKAI ice design system.
+Public website for Breachmatrix, built on the BREACHMATRIX ice design system.
 
 - `site/` is the website (plain HTML, CSS and JS; no build step).
-- `.claude/skills/hosakai-ice-design/` is the design rulebook. Read `SKILL.md` first.
-- Check the design: `python3 .claude/skills/hosakai-ice-design/scripts/check_design.py site`
+- `.claude/skills/breachmatrix-ice-design/` is the design rulebook. Read `SKILL.md` first.
+- Check the design: `python3 .claude/skills/breachmatrix-ice-design/scripts/check_design.py site`
 
 ## Production
 
-The `waktestc-cmd/hosakai-site` repository publishes `site/` to GitHub Pages at
+The production GitHub repository publishes `site/` to GitHub Pages at
 https://breachmatrix.com on pushes to `main`. Cloudflare proxies the domain.
 The local downloaded folder is not a Git checkout; publish through a checkout
 of that repository, excluding `.private/`, `.venv/` and local tooling state.

@@ -28,7 +28,7 @@ produced or a label that names a thing. Never a third family.
 | Status word (mono form) | mono | 400 | 12px | 0.04em | UPPERCASE | tone colour | `.hk-status--mono` |
 | Terminal / code | mono | 400 | 12px / 1.65 | — | as data | `--fg-2` | `.rdm-pre` |
 | Ice glyph mark | mono | 600 | 13px / 1 | — | — | tone colour | `.ice-mark`, `.hk-status::before` |
-| Wordmark "HOSAKAI" | mono | 500 | 13px | 0.18em | UPPERCASE | `--fg-1` | `.shell-brand__word` |
+| Wordmark "BREACHMATRIX" | mono | 500 | 13px | 0.18em | UPPERCASE | `--fg-1` | `.shell-brand__word` |
 | Tiny meta | mono | 400–500 | 11px | 0.06em | UPPERCASE | `--fg-3` | agents grid status, meter |
 
 Rules that people get wrong:
@@ -61,7 +61,7 @@ Use `gap` on flex/grid parents, not margins on children.
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐ 56px header (--bg, 1px bottom border)
-│ [K] HOSAKAI   [ Search pages and actions      Ctrl K ]   …   (AN)▾│
+│ [K] BREACHMATRIX   [ Search pages and actions      Ctrl K ]   …   (AN)▾│
 ├────┬─────────────────────────────────────────────────────────────┤
 │ D  │ SECTION   Page · Page · Page                    : + # # ##  │ 44px section tabs (--bg-sunk), only if 2+ pages
 │ B  ├─────────────────────────────────────────────────────────────┤
@@ -78,7 +78,7 @@ Use `gap` on flex/grid parents, not margins on children.
  U account, L admin at the bottom; ice rising between the two groups
 ```
 
-- **Header (56px):** HOSAKAI monogram (24px) + wordmark → search button (max 400px wide, shows `⌘K`/`Ctrl K`) → spacer → the assistant pill (if any) → profile avatar. The profile menu holds: name and email, **Dark/Light theme**, Account settings, divider, Sign out.
+- **Header (56px):** BREACHMATRIX monogram (24px) + wordmark → search button (max 400px wide, shows `⌘K`/`Ctrl K`) → spacer → the assistant pill (if any) → profile avatar. The profile menu holds: name and email, **Dark/Light theme**, Account settings, divider, Sign out.
 - **Icon rail (56px):** 40px square items, 18px icons stroke 1.75, `--fg-3`; hover `--surface-2`; active `--surface-3` + a 2px `--fg-1` bar on the left edge; tooltips to the right on hover/focus. A strip of rising ice fills the space between the two groups.
 - **Section tabs (44px):** only for sections with 2+ pages. Section name as `.ds-label`, then links (14px, `--fg-2`; active `--fg-1` weight 500 with a 2px `--fg-1` underline on the bar's bottom line), ice drifting in at the far right. Never a 240px side panel; never duplicate these tabs inside the page.
 - **Page area:** scrolls on its own; header, rail and tabs stay put. Page content must never carry `transform`, `filter`, `isolation` or `will-change`, because that traps fixed popups.

@@ -1,4 +1,4 @@
-/* HOSAKAI base reset. Load FIRST, before tokens.css.
+/* BREACHMATRIX base reset. Load FIRST, before tokens.css.
    The app gets these from Tailwind's preflight; a page without Tailwind needs
    this file or it will pick up browser margins, serif buttons and the like. */
 *, *::before, *::after { box-sizing: border-box; border: 0 solid var(--border, currentColor); }

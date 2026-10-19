@@ -1,16 +1,16 @@
-/* HOSAKAI ice kit, plain JavaScript (no framework, no build step).
+/* BREACHMATRIX ice kit, plain JavaScript (no framework, no build step).
  *
  * The SAME numbers as the React engine in assets/react/engine.ts and Ice.tsx.
  * Do not change any constant in this file: the look depends on them.
  * If you need different behaviour, you are probably using the wrong piece.
  *
- * Use it with data attributes, then call HosakaiIce.init() once (it also runs
+ * Use it with data attributes, then call BreachmatrixIce.init() once (it also runs
  * itself on DOMContentLoaded):
  *
  *   <div class="ice-host"><canvas aria-hidden="true" class="ice-patch" data-ice="drift" data-ice-amount="0.9"></canvas></div>
  *   <div class="ice-band" data-ice-band="broken"><canvas aria-hidden="true" class="ice-patch"></canvas></div>
  *   <span data-scramble="51"></span>                 a number that scrambles in once
- *   <p class="ice-prompt" data-prompt="hosakai run baseline"></p>   a typed command line
+ *   <p class="ice-prompt" data-prompt="breachmatrix run baseline"></p>   a typed command line
  *   <span data-ice-meter="67" data-cells="20" data-tone="ok"></span>  ####······
  *
  * Every animation stops under prefers-reduced-motion, off screen, and in a
@@ -242,7 +242,7 @@
     t.querySelector(".ds-toast__title").textContent = opts.title;
     if (opts.description) t.querySelector(".ds-toast__desc").textContent = opts.description;
     host.prepend(t);
-    if (window.HosakaiIcons) window.HosakaiIcons.render(t);
+    if (window.BreachmatrixIcons) window.BreachmatrixIcons.render(t);
     function remove() { t.remove(); }
     t.querySelector(".hk-toast__close").addEventListener("click", remove);
     setTimeout(remove, opts.duration || 4000);
@@ -309,7 +309,7 @@
     });
   }
 
-  window.HosakaiIce = {
+  window.BreachmatrixIce = {
     ICE_CHARS: ICE_CHARS, iceHash: iceHash, iceDensity: iceDensity,
     startIce: startIce, startBand: startBand, scramble: scramble, prompt: prompt, meter: meter,
     setTheme: setTheme, initTheme: initTheme, init: init, reducedMotion: reducedMotion,
